@@ -9,19 +9,22 @@
                 <div class="sign-in--form">
                     <div action="" class="form">
                         <div class="form--input">
-                            <input type="text" v-model="username" required class="input" name="" placeholder="Số điện thoại/email" id="">    
+                            <input type="text"   v-model="username" required class="input" name="username" ref="username" placeholder="Tên đăng nhập/email" id=""> 
+                            <span id="" class="form-text " :class="{'text-muted':textMuteUserName}">Không được để trống</span>
                         </div>
                         <div class="form--input">
-                            <input type="password" v-model="password" required class="input" name="" placeholder="Mật khẩu" id="">
+                            <input type="password" v-model="password" required class="input" ref="password" name="" placeholder="Mật khẩu" id="">
+                            <span id="" class="form-text" :class="{'text-muted':textMutePassword}">Không được để trống</span>
                         </div>
                         <div class="form--forgot-password">
-                            <a href="#">Quên mật khẩu?</a>
+                            <a href="#" class="color-text">Quên mật khẩu?</a>
                         </div>
-                        <div class="">
+                        <div class="form--input">
                             <input type="submit" @click="btnSignInClick()" class="input form--btn" value="Đăng nhập">
                         </div>
                         <div class="form--sign-up">
-                            Chưa có công ty? <a href="#"> Đăng ký</a>
+                            Chưa có công ty? 
+                            <router-link to="/sign-up" class="color-text">Đăng ký</router-link>
                         </div>
                     </div>
                 </div>
@@ -34,7 +37,15 @@
 
 <style>
 
+.form-text{
+    color: red;
+    font-size: 12px;
 
+}
+
+.text-muted{
+    display: none;
+}
 .sign-in{
     background-image: url("../../assets/img/bg_login.jpg");
     background-size: cover;
@@ -85,28 +96,19 @@
     width: 100%;
 }
 
-.sign-in--form .input{
-    width: 100%;
-    box-sizing: border-box;
-    height: 40px;
-    border-radius: 4px;
-    outline: none;
-    border: 1px solid #ccc;
-    padding: 0 8px;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.sign-in--form .input:focus{
-    border: 1px solid #0073e6;
-}
 .form--forgot-password{
     margin-bottom: 20px;
 
 }
 
-a{
+.sign-in--form .color-text{
     text-decoration: none;
+    color: #0073e6;
+}
+
+.sign-in--form .color-text:hover{
+    opacity: 0.9;
+    color: #384fd5;
 }
 
 .form--sign-up{
@@ -144,7 +146,9 @@ export default {
     },
     props:{
         username:{ type: String},  
-        password:{type:String}         
+        password:{type:String} ,
+        textMuteUserName:{type:Boolean,default: true},
+        textMutePassword: {type:Boolean,default: true},
     },
     data(){
         return{
@@ -152,21 +156,50 @@ export default {
         }
     },
     methods: {
+        // tạm thời chưa viết xong phải quay lại viết chức năng này
         btnSignInClick(){
-            axios.get(`http://localhost:3000/users?email=${this.username}`)
-            .then((response) => {
-                 this.data1[0] = response.data[0];
-                console.log(response)
-                // console.log(this.data1.data)
-            })
-            .catch((response) => {
-                console.log(response);
-            });
-            if(this.data1[0].password == this.password)
-                alert("mk dung")
-            else
-                alert("mk sai")
+                if(this.validate()){
+                    axios.get(`http://localhost:3000/users?email=${this.username}`)
+                .then((response) => {
+                    this.data1[0] = response.data[0];
+                    console.log(response)
+                    // console.log(this.data1.data)
+                })
+                .catch((response) => {
+                    console.log(response);
+                });
+                if(this.data1[0] == null){
+                    alert("user khong ton tai")
+                }else{
+                    if(this.data1[0].password == this.password)
+                        alert("mk dung")
+                    else
+                        alert("mk sai")
+                }
+                }
+                
+                
+            
+                
+            
+        },
+        validate(){
+            if(this.username == "" || this.username == null){
+                this.textMuteUserName = false
+                this.$refs.username.focus()
+            }else{
+                this.textMuteUserName = true
+            }
+            if(this.password == "" || this.password == null){
+                this.textMutePassword = false
+                this.$refs.password.focus()
+            }else{
+                this.textMutePassword = true
+                return true
+            }
+            return false
         }
+       
     }
 };
 
