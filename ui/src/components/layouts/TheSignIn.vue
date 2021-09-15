@@ -159,23 +159,24 @@ export default {
         // tạm thời chưa viết xong phải quay lại viết chức năng này
         btnSignInClick(){
                 if(this.validate()){
-                    axios.get(`http://localhost:3000/users?email=${this.username}`)
+                    axios.get(`http://localhost:3000/users?username=${this.username}`)
                 .then((response) => {
                     this.data1[0] = response.data[0];
                     console.log(response)
+                     if(this.data1.length == 0 ){
+                        alert("user khong ton tai")
+                    }else{
+                        if(this.data1[0].password == this.password)
+                            alert("mk dung")
+                        else
+                            alert("mk sai")
+                    }
                     // console.log(this.data1.data)
                 })
                 .catch((response) => {
                     console.log(response);
                 });
-                if(this.data1[0] == null){
-                    alert("user khong ton tai")
-                }else{
-                    if(this.data1[0].password == this.password)
-                        alert("mk dung")
-                    else
-                        alert("mk sai")
-                }
+               
                 }
                 
                 

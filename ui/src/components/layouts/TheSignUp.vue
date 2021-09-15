@@ -29,8 +29,8 @@
                         <span id="" class="form-text text-muted">Không được để trống</span>
                     </div>
                     <div class="form-item">
-                        <label for="email">Email</label>
-                        <input type="email" class="input" name="" id="email"  placeholder="Nhập email">
+                        <label for="email">Tên đăng nhập/Email</label>
+                        <input type="text" class="input" name="" id="email"  placeholder="Nhập tên đăng nhập/email">
                         <span id="" class="form-text text-muted">Không được để trống</span>
                     </div>
                     <div class="form-item">
