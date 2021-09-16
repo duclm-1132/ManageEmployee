@@ -194,17 +194,14 @@ export default {
 						if (this.data1.length == 0) {
 							alert("user khong ton tai")
 						} else {
-<<<<<<< HEAD
 							if (this.data1[0].password == this.password)
 								alert("mk dung")
 							else
 								alert("mk sai")
-=======
 							if (this.data1[0].password == this.password) {
 								// alert("mk dung")
 								router.push("HomePage");
 							} else alert("mk sai 1");
->>>>>>> feature-listEmployee
 						}
 						// console.log(this.data1.data)
 					})
