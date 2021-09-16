@@ -67,6 +67,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </template>
 
@@ -169,7 +170,9 @@ import axios from "axios";
 import router from "../../router";
 
 export default {
-	components: {},
+	components: {
+
+	},
 	props: {
 		username: { type: String },
 		password: { type: String },
@@ -178,8 +181,11 @@ export default {
 	},
 	data() {
 		return {
-			data1: [],
+			data1: {},
 		};
+	},
+	created() {
+
 	},
 	methods: {
 		// tạm thời chưa viết xong phải quay lại viết chức năng này
@@ -188,14 +194,16 @@ export default {
 				axios
 					.get(`http://localhost:3000/users?username=${this.username}`)
 					.then((response) => {
-						this.data1[0] = response.data[0];
+						this.data1 = response.data[0];
 						console.log(response);
 						if (this.data1.length == 0) {
 							alert("user khong ton tai");
 						} else {
-							if (this.data1[0].password == this.password) {
+							if (this.data1.password == this.password) {
 								// alert("mk dung")
-								router.push("HomePage");
+								const user = this.data1;
+								router.push({ name: "HomePage", query: { user: { user } } });
+
 							} else alert("mk sai");
 						}
 						// console.log(this.data1.data)
