@@ -169,7 +169,6 @@ import axios from "axios";
 import router from "../../router";
 
 export default {
-	name: "SignIn",
 	components: {},
 	props: {
 		username: { type: String },
@@ -182,27 +181,22 @@ export default {
 			data1: [],
 		};
 	},
-	created() { },
 	methods: {
-		/**
-         * click button login
-         * CreatedBy: DucLM-1132
-         * CreatedDate: 14/09/2021
-         */
+		// tạm thời chưa viết xong phải quay lại viết chức năng này
 		btnSignInClick() {
 			if (this.validate()) {
 				axios
-					.get(`http://localhost:3000/users?email=${this.username}`)
+					.get(`http://localhost:3000/users?username=${this.username}`)
 					.then((response) => {
 						this.data1[0] = response.data[0];
 						console.log(response);
-						if (this.data1[0] == null) {
+						if (this.data1.length == 0) {
 							alert("user khong ton tai");
 						} else {
 							if (this.data1[0].password == this.password) {
 								// alert("mk dung")
 								router.push("HomePage");
-							} else alert("mk sai 1");
+							} else alert("mk sai");
 						}
 						// console.log(this.data1.data)
 					})
@@ -211,11 +205,6 @@ export default {
 					});
 			}
 		},
-        /**
-         * validate input
-         * CreatedBy: DucLM-1132
-         * CreatedDate: 14/09/2021
-         */
 		validate() {
 			if (this.username == "" || this.username == null) {
 				this.textMuteUserName = false;
