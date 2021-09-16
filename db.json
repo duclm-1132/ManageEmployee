@@ -1,6 +1,6 @@
 {
     "users": [
-      { "id": 1, "firstName": "Lê Minh", "lastName": "Đức", "phoneNumber":"0334678666", "email":"duc1234", "password":"12345678" }
+      { "id": 1, "firstName": "Lê Minh", "lastName": "Đức", "phoneNumber":"0334678666", "username":"duc1234", "password":"12345678" }
     ],
     "employees": [
       {
