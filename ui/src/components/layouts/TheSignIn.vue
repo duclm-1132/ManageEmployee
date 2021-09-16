@@ -169,71 +169,9 @@ import axios from "axios";
 import router from "../../router";
 
 export default {
-<<<<<<< HEAD
-    components: {
-      
-    },
-    props:{
-        username:{ type: String},  
-        password:{type:String} ,
-        textMuteUserName:{type:Boolean,default: true},
-        textMutePassword: {type:Boolean,default: true},
-    },
-    data(){
-        return{
-            data1:[],
-        }
-    },
-    methods: {
-        // tạm thời chưa viết xong phải quay lại viết chức năng này
-        btnSignInClick(){
-                if(this.validate()){
-                    axios.get(`http://localhost:3000/users?username=${this.username}`)
-                .then((response) => {
-                    this.data1[0] = response.data[0];
-                    console.log(response)
-                     if(this.data1.length == 0 ){
-                        alert("user khong ton tai")
-                    }else{
-                        if(this.data1[0].password == this.password)
-                            alert("mk dung")
-                        else
-                            alert("mk sai")
-                    }
-                    // console.log(this.data1.data)
-                })
-                .catch((response) => {
-                    console.log(response);
-                });
-               
-                }
-                
-                
-            
-                
-            
-        },
-        validate(){
-            if(this.username == "" || this.username == null){
-                this.textMuteUserName = false
-                this.$refs.username.focus()
-            }else{
-                this.textMuteUserName = true
-            }
-            if(this.password == "" || this.password == null){
-                this.textMutePassword = false
-                this.$refs.password.focus()
-            }else{
-                this.textMutePassword = true
-                return true
-            }
-            return false
-        }
-       
-    }
-=======
-	name: "SignIn",
-	components: {},
+	components: {
+
+	},
 	props: {
 		username: { type: String },
 		password: { type: String },
@@ -243,29 +181,23 @@ export default {
 	data() {
 		return {
 			data1: [],
-		};
+		}
 	},
-	created() { },
 	methods: {
-		/**
-         * click button login
-         * CreatedBy: DucLM-1132
-         * CreatedDate: 14/09/2021
-         */
+		// tạm thời chưa viết xong phải quay lại viết chức năng này
 		btnSignInClick() {
 			if (this.validate()) {
-				axios
-					.get(`http://localhost:3000/users?email=${this.username}`)
+				axios.get(`http://localhost:3000/users?username=${this.username}`)
 					.then((response) => {
 						this.data1[0] = response.data[0];
-						console.log(response);
-						if (this.data1[0] == null) {
-							alert("user khong ton tai");
+						console.log(response)
+						if (this.data1.length == 0) {
+							alert("user khong ton tai")
 						} else {
-							if (this.data1[0].password == this.password) {
-								// alert("mk dung")
-								router.push("HomePage");
-							} else alert("mk sai");
+							if (this.data1[0].password == this.password)
+								alert("mk dung")
+							else
+								alert("mk sai")
 						}
 						// console.log(this.data1.data)
 					})
@@ -274,28 +206,23 @@ export default {
 					});
 			}
 		},
-        /**
-         * validate input
-         * CreatedBy: DucLM-1132
-         * CreatedDate: 14/09/2021
-         */
 		validate() {
 			if (this.username == "" || this.username == null) {
-				this.textMuteUserName = false;
-				this.$refs.username.focus();
+				this.textMuteUserName = false
+				this.$refs.username.focus()
 			} else {
-				this.textMuteUserName = true;
+				this.textMuteUserName = true
 			}
 			if (this.password == "" || this.password == null) {
-				this.textMutePassword = false;
-				this.$refs.password.focus();
+				this.textMutePassword = false
+				this.$refs.password.focus()
 			} else {
-				this.textMutePassword = true;
-				return true;
+				this.textMutePassword = true
+				return true
 			}
-			return false;
-		},
-	},
->>>>>>> feature-listEmployee
+			return false
+		}
+
+	}
 };
 </script>
