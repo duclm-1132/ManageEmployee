@@ -1,17 +1,17 @@
 <template>
 	<div id="app">
-		<!-- <TheSignIn/> -->
+		<!-- <TheSignIn /> -->
 		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-//  import TheSignIn from './components/layouts/TheSignIn.vue'
+// import TheSignIn from './components/layouts/TheSignIn.vue'
 
 export default {
 	name: 'App',
 	components: {
-		//  TheSignIn
+		// TheSignIn,
 	}
 }
 </script>

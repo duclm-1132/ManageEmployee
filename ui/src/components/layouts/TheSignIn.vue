@@ -58,10 +58,10 @@
 						</div>
 						<div class="form--sign-up">
 							Chưa có công ty?
-							<router-link
+							<a @click="clickSignUp()"
 								to="/sign-up"
 								class="color-text"
-							>Đăng ký</router-link>
+							>Đăng ký</a>
 						</div>
 					</div>
 				</div>
@@ -229,6 +229,9 @@ export default {
 			}
 			return false;
 		},
+		clickSignUp(){
+			router.push({name:"SignUp"})
+		}
 	},
 };
 </script>
