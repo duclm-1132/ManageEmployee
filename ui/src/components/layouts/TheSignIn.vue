@@ -19,11 +19,10 @@
 								placeholder="Tên đăng nhập/email"
 								id=""
 							/>
-							<span
-								id=""
-								class="form-text"
+							<div
+								class="text-msg"
 								:class="{ 'text-muted': textMuteUserName }"
-							>Không được để trống</span>
+							>{{msg}}</div>
 						</div>
 						<div class="form--input">
 							<input
@@ -36,11 +35,10 @@
 								placeholder="Mật khẩu"
 								id=""
 							/>
-							<span
-								id=""
-								class="form-text"
+							<div
+								class="text-msg"
 								:class="{ 'text-muted': textMutePassword }"
-							>Không được để trống</span>
+							>{{msg}}</div>
 						</div>
 						<div class="form--forgot-password">
 							<a
@@ -58,10 +56,11 @@
 						</div>
 						<div class="form--sign-up">
 							Chưa có công ty?
-							<router-link
-								to="/sign-up"
+							<a
+								@click="clickSignUp()"
+								
 								class="color-text"
-							>Đăng ký</router-link>
+							>Đăng ký</a>
 						</div>
 					</div>
 				</div>
@@ -71,7 +70,7 @@
 </template>
 
 <style>
-.form-text {
+.text-msg {
 	color: red;
 	font-size: 12px;
 }
@@ -146,6 +145,10 @@
 	text-align: center;
 }
 
+.form--sign-up a {
+	cursor: pointer;
+}
+
 .form--btn {
 	background: #0073e6;
 	font-weight: 500;
@@ -180,13 +183,36 @@ export default {
 	},
 	data() {
 		return {
+<<<<<<< HEAD
 			data1: [],
 		}
 	},
 	methods: {
 		// tạm thời chưa viết xong phải quay lại viết chức năng này
+=======
+			data1: {},
+			msg: "",
+		};
+	},
+	created() {
+
+	},
+	methods: {
+		/**
+		 * sign in click
+		 * CreatedBy: DucLM (20/09/2021)
+		 * 1. check null user password : not null then call api
+		 * 2. call api get user by username
+		 * 	- data is null then show message: "Tài khoản không tồn tại"
+		 * 3. check password
+		 * 	- true: go to HomePage
+		 *  - false: show msg
+		 */
+>>>>>>> feature-listEmployee
 		btnSignInClick() {
+			// 1. check null user password
 			if (this.validate()) {
+<<<<<<< HEAD
 				axios.get(`http://localhost:3000/users?username=${this.username}`)
 					.then((response) => {
 						this.data1[0] = response.data[0];
@@ -202,15 +228,44 @@ export default {
 								// alert("mk dung")
 								router.push("HomePage");
 							} else alert("mk sai 1");
+=======
+				//2 call api
+				axios
+					.get(`http://localhost:3000/users?username=${this.username}`)
+					.then((response) => {
+						this.data1 = response.data[0];
+						console.log(response);
+						// check response data
+						if (!this.data1) {
+							this.msg = "Tài khoản không tồn tại."
+							this.textMuteUserName = false;
+						} else {
+							//3. check password
+							if (this.data1.password == this.password) {
+								const user = this.data1;
+								router.push({ name: "HomePage", query: { user: { user } } });
+							} else {
+								this.msg = "Sai mật khẩu";
+								this.textMutePassword = false;
+								this.$refs.password.focus();
+							}
+>>>>>>> feature-listEmployee
 						}
-						// console.log(this.data1.data)
 					})
 					.catch((response) => {
 						console.log(response);
 					});
 			}
 		},
+<<<<<<< HEAD
+=======
+		/**
+		 * vaidate data username, password
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+>>>>>>> feature-listEmployee
 		validate() {
+			this.msg = "Không được để trống"
 			if (this.username == "" || this.username == null) {
 				this.textMuteUserName = false
 				this.$refs.username.focus()
@@ -224,9 +279,22 @@ export default {
 				this.textMutePassword = true
 				return true
 			}
+<<<<<<< HEAD
 			return false
 		}
 
 	}
+=======
+			return false;
+		},
+		/**
+		 * Click signUP then go to page SignUp
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+		clickSignUp() {
+			router.push({ name: "SignUp" })
+		}
+	},
+>>>>>>> feature-listEmployee
 };
 </script>

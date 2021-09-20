@@ -72,8 +72,13 @@
 								name=""
 								id="firstName"
 								placeholder="Nhập họ và tên đệm"
+								v-model="user.firstName"
+								ref="firstName"
 							>
-							<span class="form-text text-muted">Không được để trống</span>
+							<div
+								class="text-error"
+								:class="{ 'text-muted': textMuteFirstName }"
+							>{{msg}}</div>
 						</div>
 						<div class="form-item lastName">
 							<label for="lastName">Tên</label>
@@ -83,36 +88,51 @@
 								name=""
 								id="lastName"
 								placeholder="Nhập tên"
+								v-model="user.lastName"
+								ref="lastName"
 							>
-							<span class="form-text text-muted">Không được để trống</span>
+							<div
+								class="text-error"
+								:class="{ 'text-muted': textMuteLastName }"
+							>{{msg}}</div>
 						</div>
 					</div>
 					<div class="form-item">
-						<label for="phoneNumber">Số điện thoại</label>
+						<label for="companyName">Tên công ty</label>
 						<input
 							type="text"
 							class="input"
 							name=""
-							id="phoneNumber"
-							placeholder="Nhập số điện thoại"
+							id="companyName"
+							placeholder="Nhập tên công ty"
+							v-model="user.companyName"
+							ref="companyName"
 						>
-						<span
-							id=""
-							class="form-text text-muted"
-						>Không được để trống</span>
+						<div
+							class="text-error"
+							:class="{ 'text-muted': textMuteCompanyName }"
+						>{{msg}}</div>
 					</div>
 					<div class="form-item">
-						<label for="email">Email</label>
+						<label for="username">Tên đăng nhập/Email</label>
 						<input
-							type="email"
+							type="text"
 							class="input"
 							name=""
-							id="email"
-							placeholder="Nhập email"
+							id="username"
+							placeholder="Nhập tên đăng nhập/email"
+							v-model="user.username"
+							ref="username"
+							@input="checkUsernameExist"
 						>
-						<span class="form-text text-muted">Không được để trống</span>
+						<div
+							class="text-error"
+							:class="{'text-muted': textMuteUserName , 'text-suscess' : textCheckUserName }"
+						>{{msg}}</div>
+
 					</div>
-					<div class="form-item">
+					<div class="
+							form-item">
 						<label for="password">Mật khẩu</label>
 						<input
 							type="password"
@@ -121,15 +141,21 @@
 							name=""
 							id="password"
 							placeholder="Nhập mật khẩu"
+							v-model="user.password"
+							ref="password"
 						>
-						<span class="form-text text-muted">Không được để trống</span>
+						<div
+							class="text-error"
+							:class="{ 'text-muted': textMutePassword }"
+						>{{msg}}</div>
 					</div>
 					<div class="form-item">
 						<input
 							type="submit"
 							class="input btn-submit"
 							value="Đăng ký"
-						>
+							@click="btnClickSignUp()"
+						/>
 					</div>
 				</div>
 			</div>
@@ -151,11 +177,13 @@
 	color: #384fd5;
 }
 
-.form-text {
-	color: red;
+.text-error {
+	color: red !important;
 	font-size: 12px;
 }
-
+.text-suscess {
+	color: #27ff00 !important;
+}
 .text-muted {
 	display: none;
 }
@@ -235,7 +263,129 @@
 </style>
 
 <script>
-export default {
+import axios from "axios";
+import router from "../../router";
 
+export default {
+	name: "SignUp",
+	props: {
+		textMuteFirstName: { type: Boolean, default: true },
+		textMuteLastName: { type: Boolean, default: true },
+		textMuteCompanyName: { type: Boolean, default: true },
+		textMuteUserName: { type: Boolean, default: true },
+		textCheckUserName: { type: Boolean, default: true },
+		textMutePassword: { type: Boolean, default: true },
+	},
+	data() {
+		return {
+			msg: "",
+			msgCheck: "",
+			user: { type: Object },
+		}
+	},
+
+	methods: {
+		/**
+		 * validate input null
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+		validate() {
+			this.msg = "Không được để trống"
+			if (this.user.firstName == "" || this.user.firstName == null) {
+				this.textMuteFirstName = false;
+				this.$refs.firstName.focus();
+			} else {
+				this.textMuteFirstName = true;
+			}
+			if (this.user.lastName == "" || this.user.lastName == null) {
+				this.textMuteLastName = false;
+				this.$refs.lastName.focus();
+			} else {
+				this.textMutelastName = true;
+			}
+			if (this.user.companyName == "" || this.user.companyName == null) {
+				this.textMuteCompanyName = false;
+				this.$refs.companyName.focus();
+			} else {
+				this.textMuteCompanyName = true;
+			}
+			if (this.user.username == "" || this.user.username == null) {
+				this.textMuteUsername = false;
+				this.$refs.username.focus();
+			} else {
+				this.textMuteUsername = true;
+			}
+			if (this.user.password == "" || this.user.password == null) {
+				this.textMutePassword = false;
+				this.$refs.password.focus();
+			} else {
+				this.textMutePassword = true;
+				return true;
+			}
+			return false;
+		},
+		/**
+		 * click sign up
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+		btnClickSignUp() {
+			if (this.validate()) {
+				if(this.checkUsernameExist()){
+					axios.post("http://localhost:3000/users", {
+					firstName: this.user.firstName,
+					lastName: this.user.lastName,
+					companyName: this.user.companyName,
+					username: this.user.username,
+					password: this.user.password
+				})
+					.then((res) => {
+						console.log(res)
+						// alert("ok")
+						router.push("/")
+					})
+					.catch((res) => {
+						console.log(res);
+						alert("false")
+					});
+				}
+				
+
+
+			}
+		},
+		/**
+		 * check username is exist
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+		checkUsernameExist(e) {
+			let val = e.target.value;
+			clearTimeout(this.timeOut);
+			this.timeOut = setTimeout(() => {
+				this.user.username = val;
+				axios
+					.get(`http://localhost:3000/users?username=${this.user.username}`)
+					.then((response) => {
+						this.data1 = response.data[0];
+						console.log(response);
+						// check response data
+						if (!this.data1) {
+							this.msgCheck = "Tài khoản hợp lệ"
+							this.msg = ""
+							this.textCheckUserName = true;
+							return true;
+						} else {
+							this.msgCheck = "Tài khoản đã tồn tại, vui lòng thử tài khoản khác."
+							this.msg = ""
+							this.textMuteUserName = false;
+							this.textCheckUserName = false;
+							return false;
+						}
+					})
+					.catch((response) => {
+						console.log(response);
+					});
+			}, 1000);
+		}
+	},
 }
 </script>
