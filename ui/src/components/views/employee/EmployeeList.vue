@@ -245,7 +245,6 @@ export default {
 .btn-edit {
 	position: relative;
 	display: flex;
-
 	align-items: center;
 	/* z-index: 100; */
 }
@@ -426,7 +425,7 @@ th {
 	justify-content: space-between;
 }
 .content-table .content-table-height {
-	height: calc(100% - 118px);
+	height: calc(100% - 150px);
 	overflow-y: auto;
 	margin: 0 24px 0 16px;
 }

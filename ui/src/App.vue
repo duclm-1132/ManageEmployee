@@ -23,5 +23,6 @@ export default {
 	padding: 0;
 	outline: none;
 	box-sizing: border-box;
+	font-family: GoogleSans-Regular;
 }
 </style>

@@ -2,7 +2,7 @@
 	<div class="home-page">
 		<TheNavbar />
 		<div>
-			<TheHeader />
+			<TheHeader :user="userData" />
 			<TheContent />
 		</div>
 
@@ -22,15 +22,15 @@ export default {
 		TheContent
 	},
 	props: {
-		// user:{type: Object},
+		// user: { type: Object },
 	},
 	data() {
 		return {
-			user: {},
+			userData: {},
 		}
 	},
 	created() {
-		this.user = this.$route.query;
+		this.userData = this.$route.query;
 	},
 }
 </script>

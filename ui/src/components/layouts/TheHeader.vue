@@ -3,15 +3,11 @@
 		<div class="header-left">
 			<div class="header-icon three-tripes"></div>
 			<div class="flex header-branch">
-				<div class="header-branch-name">
-					CÔNG TY TNHH SẢN SUẤT - THƯƠNG MẠI - DỊCH VỤ QUI PHÚC
+				<div class="header-branch-name text-uppercase">
+					{{user.user.user.companyName}}
 				</div>
 				<div class="header-icon chevron-right"></div>
 			</div>
-			<!-- <div class="flex db-content">
-                <div class="db-icon"></div>
-                <div class="db-name">DC-01</div>
-            </div> -->
 		</div>
 		<div class="header-right">
 			<button class="button">
@@ -21,14 +17,24 @@
 			</button>
 			<div class="flex header-branch">
 				<div class="header-icon user-avatar"></div>
-				<div class="header-branch-name">Lê Minh Đức</div>
+				<div class="header-branch-name">{{user.user.user.firstName}} {{user.user.user.lastName}}</div>
 				<div class="header-icon chevron-right"></div>
+			</div>
+			<div class="header__menu-dropdown">
+				
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-export default {};
+export default {
+	props: {
+		user : {type: Object}
+	},
+	created() {
+		
+	},
+};
 </script>
 <style scoped>
 .header {
@@ -40,6 +46,9 @@ export default {};
 	display: flex !important;
 	align-items: center;
 	justify-content: space-between;
+}
+.text-uppercase{
+	text-transform: uppercase;
 }
 .header .header-left {
 	display: flex;
@@ -53,6 +62,14 @@ export default {};
 	line-height: 32px;
 	margin-right: 16px;
 	box-sizing: border-box;
+}
+.header__menu-dropdown{
+	background: yellow;
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    right: 24px;
+    top: 48px;
 }
 .header-icon {
 	background: url("../../assets/Sprites.5f05e81f.svg") no-repeat;
@@ -72,33 +89,6 @@ export default {};
 .header-branch-name {
 	font-size: 13px;
 	line-height: 32px;
-}
-.header .db-content {
-	border: 1px solid #ebedf0;
-	padding: 0 12px;
-	border-radius: 40px;
-	margin-left: 15px;
-	font-size: 13px;
-	cursor: pointer;
-	height: 30px;
-	margin-right: 10px;
-}
-.db-content .db-icon {
-	width: 8px;
-	height: 8px;
-	background-color: #4ea344;
-	border-radius: 50%;
-	border: 1px solid #fff;
-}
-.db-content .db-name {
-	max-width: 80px;
-	padding-left: 7px;
-	max-width: 200px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	transition: all 0.2s ease;
-	color: #111;
 }
 .three-tripes {
 	background-position: -843px -30px;
