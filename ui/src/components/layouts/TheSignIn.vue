@@ -183,13 +183,6 @@ export default {
 	},
 	data() {
 		return {
-<<<<<<< HEAD
-			data1: [],
-		}
-	},
-	methods: {
-		// tạm thời chưa viết xong phải quay lại viết chức năng này
-=======
 			data1: {},
 			msg: "",
 		};
@@ -208,27 +201,9 @@ export default {
 		 * 	- true: go to HomePage
 		 *  - false: show msg
 		 */
->>>>>>> feature-listEmployee
 		btnSignInClick() {
 			// 1. check null user password
 			if (this.validate()) {
-<<<<<<< HEAD
-				axios.get(`http://localhost:3000/users?username=${this.username}`)
-					.then((response) => {
-						this.data1[0] = response.data[0];
-						console.log(response)
-						if (this.data1.length == 0) {
-							alert("user khong ton tai")
-						} else {
-							if (this.data1[0].password == this.password)
-								alert("mk dung")
-							else
-								alert("mk sai")
-							if (this.data1[0].password == this.password) {
-								// alert("mk dung")
-								router.push("HomePage");
-							} else alert("mk sai 1");
-=======
 				//2 call api
 				axios
 					.get(`http://localhost:3000/users?username=${this.username}`)
@@ -249,7 +224,6 @@ export default {
 								this.textMutePassword = false;
 								this.$refs.password.focus();
 							}
->>>>>>> feature-listEmployee
 						}
 					})
 					.catch((response) => {
@@ -257,13 +231,10 @@ export default {
 					});
 			}
 		},
-<<<<<<< HEAD
-=======
 		/**
 		 * vaidate data username, password
 		 * CreatedBy: DucLM (20/09/2021)
 		 */
->>>>>>> feature-listEmployee
 		validate() {
 			this.msg = "Không được để trống"
 			if (this.username == "" || this.username == null) {
@@ -279,12 +250,6 @@ export default {
 				this.textMutePassword = true
 				return true
 			}
-<<<<<<< HEAD
-			return false
-		}
-
-	}
-=======
 			return false;
 		},
 		/**
@@ -295,6 +260,5 @@ export default {
 			router.push({ name: "SignUp" })
 		}
 	},
->>>>>>> feature-listEmployee
 };
 </script>

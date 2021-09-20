@@ -1,53 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div class="sign-up">
-        <div class="container">
-            <div class="container__item">
-                <div class="container--header">
-                    <div class="header-text">Đăng ký tài khoản</div>
-                    <div class="back-sign-in">
-                        <p>Tôi đã có tài khoản? 
-                            <router-link to="/" class="color-text-green"> Đăng nhập</router-link>
-                        </p>
-                    </div>
-                </div>
-                <div class="container-form">
-                    <div class="form-name">
-                        <div class="form-item firstName">
-                            <label for="firstName">Họ và tên</label>
-                            <input type="text" class="input" name="" id="firstName"  placeholder="Nhập họ và tên đệm">
-                            <span id="" class="form-text text-muted">Không được để trống</span>
-                        </div>
-                        <div class="form-item lastName">
-                            <label for="lastName">Tên</label>
-                            <input type="text" class="input" name="" id="lastName"  placeholder="Nhập tên">
-                            <span id="" class="form-text text-muted">Không được để trống</span>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label for="phoneNumber">Số điện thoại</label>
-                        <input type="text" class="input" name="" id="phoneNumber"  placeholder="Nhập số điện thoại">
-                        <span id="" class="form-text text-muted">Không được để trống</span>
-                    </div>
-                    <div class="form-item">
-                        <label for="email">Tên đăng nhập/Email</label>
-                        <input type="text" class="input" name="" id="email"  placeholder="Nhập tên đăng nhập/email">
-                        <span id="" class="form-text text-muted">Không được để trống</span>
-                    </div>
-                    <div class="form-item">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" minlength="8" class="input" name="" id="password"  placeholder="Nhập mật khẩu">
-                        <span id="" class="form-text text-muted">Không được để trống</span>
-                    </div>
-                    <div class="form-item">
-                        <input type="submit" class="input btn-submit" value="Đăng ký">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-=======
 	<div class="sign-up">
 		<div class="container">
 			<div class="container__item">
@@ -162,7 +113,6 @@
 		</div>
 
 	</div>
->>>>>>> feature-listEmployee
 </template>
 
 <style>
@@ -330,27 +280,24 @@ export default {
 		 */
 		btnClickSignUp() {
 			if (this.validate()) {
-				if(this.checkUsernameExist()){
+				if (this.checkUsernameExist()) {
 					axios.post("http://localhost:3000/users", {
-					firstName: this.user.firstName,
-					lastName: this.user.lastName,
-					companyName: this.user.companyName,
-					username: this.user.username,
-					password: this.user.password
-				})
-					.then((res) => {
-						console.log(res)
-						// alert("ok")
-						router.push("/")
+						firstName: this.user.firstName,
+						lastName: this.user.lastName,
+						companyName: this.user.companyName,
+						username: this.user.username,
+						password: this.user.password
 					})
-					.catch((res) => {
-						console.log(res);
-						alert("false")
-					});
+						.then((res) => {
+							console.log(res)
+							// alert("ok")
+							router.push("/")
+						})
+						.catch((res) => {
+							console.log(res);
+							alert("false")
+						});
 				}
-				
-
-
 			}
 		},
 		/**
