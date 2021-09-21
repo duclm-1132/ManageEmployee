@@ -5,11 +5,13 @@
 				<div class="container--header">
 					<div class="header-text">Đăng ký tài khoản</div>
 					<div class="back-sign-in">
-						<p>Tôi đã có tài khoản?
+						<p>
+							Tôi đã có tài khoản?
 							<router-link
 								to="/"
 								class="color-text-green"
-							> Đăng nhập</router-link>
+							>
+								Đăng nhập</router-link>
 						</p>
 					</div>
 				</div>
@@ -25,11 +27,13 @@
 								placeholder="Nhập họ và tên đệm"
 								v-model="user.firstName"
 								ref="firstName"
-							>
+							/>
 							<div
 								class="text-error"
 								:class="{ 'text-muted': textMuteFirstName }"
-							>{{msg}}</div>
+							>
+								{{ msg }}
+							</div>
 						</div>
 						<div class="form-item lastName">
 							<label for="lastName">Tên</label>
@@ -41,11 +45,13 @@
 								placeholder="Nhập tên"
 								v-model="user.lastName"
 								ref="lastName"
-							>
+							/>
 							<div
 								class="text-error"
 								:class="{ 'text-muted': textMuteLastName }"
-							>{{msg}}</div>
+							>
+								{{ msg }}
+							</div>
 						</div>
 					</div>
 					<div class="form-item">
@@ -58,11 +64,13 @@
 							placeholder="Nhập tên công ty"
 							v-model="user.companyName"
 							ref="companyName"
-						>
+						/>
 						<div
 							class="text-error"
 							:class="{ 'text-muted': textMuteCompanyName }"
-						>{{msg}}</div>
+						>
+							{{ msg }}
+						</div>
 					</div>
 					<div class="form-item">
 						<label for="username">Tên đăng nhập/Email</label>
@@ -74,13 +82,13 @@
 							placeholder="Nhập tên đăng nhập/email"
 							v-model="user.username"
 							ref="username"
-							@input="checkUsernameExist"
-						>
+						/>
 						<div
 							class="text-error"
-							:class="{'text-muted': textMuteUserName , 'text-suscess' : textCheckUserName }"
-						>{{msg}}</div>
-
+							:class="{ 'text-muted': textMuteUsername }"
+						>
+							{{ msg }}
+						</div>
 					</div>
 					<div class="
 							form-item">
@@ -94,11 +102,13 @@
 							placeholder="Nhập mật khẩu"
 							v-model="user.password"
 							ref="password"
-						>
+						/>
 						<div
 							class="text-error"
 							:class="{ 'text-muted': textMutePassword }"
-						>{{msg}}</div>
+						>
+							{{ msg }}
+						</div>
 					</div>
 					<div class="form-item">
 						<input
@@ -111,7 +121,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </template>
 
@@ -222,16 +231,14 @@ export default {
 		textMuteFirstName: { type: Boolean, default: true },
 		textMuteLastName: { type: Boolean, default: true },
 		textMuteCompanyName: { type: Boolean, default: true },
-		textMuteUserName: { type: Boolean, default: true },
-		textCheckUserName: { type: Boolean, default: true },
+		textMuteUsername: { type: Boolean, default: true },
 		textMutePassword: { type: Boolean, default: true },
 	},
 	data() {
 		return {
 			msg: "",
-			msgCheck: "",
 			user: { type: Object },
-		}
+		};
 	},
 
 	methods: {
@@ -240,32 +247,32 @@ export default {
 		 * CreatedBy: DucLM (20/09/2021)
 		 */
 		validate() {
-			this.msg = "Không được để trống"
-			if (this.user.firstName == "" || this.user.firstName == null) {
+			this.msg = "Không được để trống";
+			if (!this.user.firstName) {
 				this.textMuteFirstName = false;
 				this.$refs.firstName.focus();
 			} else {
 				this.textMuteFirstName = true;
 			}
-			if (this.user.lastName == "" || this.user.lastName == null) {
+			if (!this.user.lastName) {
 				this.textMuteLastName = false;
 				this.$refs.lastName.focus();
 			} else {
-				this.textMutelastName = true;
+				this.textMuteLastName = true;
 			}
-			if (this.user.companyName == "" || this.user.companyName == null) {
+			if (!this.user.companyName) {
 				this.textMuteCompanyName = false;
 				this.$refs.companyName.focus();
 			} else {
 				this.textMuteCompanyName = true;
 			}
-			if (this.user.username == "" || this.user.username == null) {
+			if (!this.user.username) {
 				this.textMuteUsername = false;
 				this.$refs.username.focus();
 			} else {
 				this.textMuteUsername = true;
 			}
-			if (this.user.password == "" || this.user.password == null) {
+			if (!this.user.password) {
 				this.textMutePassword = false;
 				this.$refs.password.focus();
 			} else {
@@ -280,59 +287,19 @@ export default {
 		 */
 		btnClickSignUp() {
 			if (this.validate()) {
-				if (this.checkUsernameExist()) {
-					axios.post("http://localhost:3000/users", {
-						firstName: this.user.firstName,
-						lastName: this.user.lastName,
-						companyName: this.user.companyName,
-						username: this.user.username,
-						password: this.user.password
+				axios
+					.post("http://localhost:3000/users", this.user)
+					.then((res) => {
+						console.log(res);
+						// alert("ok")
+						router.push("/");
 					})
-						.then((res) => {
-							console.log(res)
-							// alert("ok")
-							router.push("/")
-						})
-						.catch((res) => {
-							console.log(res);
-							alert("false")
-						});
-				}
+					.catch((res) => {
+						console.log(res);
+						alert("false");
+					});
 			}
 		},
-		/**
-		 * check username is exist
-		 * CreatedBy: DucLM (20/09/2021)
-		 */
-		checkUsernameExist(e) {
-			let val = e.target.value;
-			clearTimeout(this.timeOut);
-			this.timeOut = setTimeout(() => {
-				this.user.username = val;
-				axios
-					.get(`http://localhost:3000/users?username=${this.user.username}`)
-					.then((response) => {
-						this.data1 = response.data[0];
-						console.log(response);
-						// check response data
-						if (!this.data1) {
-							this.msgCheck = "Tài khoản hợp lệ"
-							this.msg = ""
-							this.textCheckUserName = true;
-							return true;
-						} else {
-							this.msgCheck = "Tài khoản đã tồn tại, vui lòng thử tài khoản khác."
-							this.msg = ""
-							this.textMuteUserName = false;
-							this.textCheckUserName = false;
-							return false;
-						}
-					})
-					.catch((response) => {
-						console.log(response);
-					});
-			}, 1000);
-		}
 	},
-}
+};
 </script>
