@@ -58,7 +58,6 @@
 							Chưa có công ty?
 							<a
 								@click="clickSignUp()"
-								
 								class="color-text"
 							>Đăng ký</a>
 						</div>
@@ -237,18 +236,25 @@ export default {
 		 */
 		validate() {
 			this.msg = "Không được để trống"
-			if (this.username == "" || this.username == null) {
-				this.textMuteUserName = false;
+			if (!this.username && !this.password) {
+				this.textMuteUserName = false
+				this.textMutePassword = false
 				this.$refs.username.focus();
-			} else {
-				this.textMuteUserName = true;
-			}
-			if (this.password == "" || this.password == null) {
-				this.textMutePassword = false;
-				this.$refs.password.focus();
-			} else {
-				this.textMutePassword = true;
-				return true;
+			}else{
+				if (!this.username) {
+					this.textMuteUserName = false;
+					this.$refs.username.focus();
+				} else {
+					this.textMuteUserName = true;
+				}
+				if (!this.password) {
+					this.textMutePassword = false;
+					this.$refs.password.focus();
+				} else {
+					this.textMutePassword = true;
+					return true;
+				}
+
 			}
 			return false;
 		},

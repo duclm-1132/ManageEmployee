@@ -23,6 +23,30 @@
       "username": "minhduc",
       "password": "123456789",
       "id": 3
+    },
+    {
+      "firstName": "Lee",
+      "lastName": "Nguyen",
+      "companyName": "abc",
+      "username": "minhduc12",
+      "password": "123456789",
+      "id": 4
+    },
+    {
+      "firstName": "Lee",
+      "lastName": "Nguyen",
+      "companyName": "Dược Hà Nam",
+      "username": "hainguyen",
+      "password": "1234",
+      "id": 5
+    },
+    {
+      "firstName": "Lee",
+      "lastName": "Nguyen",
+      "companyName": "Dược Hà Nội",
+      "username": "minhduc1234",
+      "password": "12345678",
+      "id": 6
     }
   ],
   "employees": [
