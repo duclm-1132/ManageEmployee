@@ -4,7 +4,7 @@
 			<div class="header-icon three-tripes"></div>
 			<div class="flex header-branch">
 				<div class="header-branch-name text-uppercase">
-					{{user.user.user.companyName}}
+					{{user.companyName}}
 				</div>
 				<div class="header-icon chevron-right"></div>
 			</div>
@@ -17,11 +17,11 @@
 			</button>
 			<div class="flex header-branch">
 				<div class="header-icon user-avatar"></div>
-				<div class="header-branch-name">{{user.user.user.firstName}} {{user.user.user.lastName}}</div>
+				<div class="header-branch-name">{{user.firstName}} {{user.lastName}}</div>
 				<div class="header-icon chevron-right"></div>
 			</div>
 			<div class="header__menu-dropdown">
-				
+
 			</div>
 		</div>
 	</div>
@@ -29,10 +29,10 @@
 <script>
 export default {
 	props: {
-		user : {type: Object}
+		user: { type: Object }
 	},
 	created() {
-		
+
 	},
 };
 </script>
@@ -47,7 +47,7 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
-.text-uppercase{
+.text-uppercase {
 	text-transform: uppercase;
 }
 .header .header-left {
@@ -63,13 +63,13 @@ export default {
 	margin-right: 16px;
 	box-sizing: border-box;
 }
-.header__menu-dropdown{
+.header__menu-dropdown {
 	background: yellow;
-    width: 300px;
-    height: 200px;
-    position: absolute;
-    right: 24px;
-    top: 48px;
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	right: 24px;
+	top: 48px;
 }
 .header-icon {
 	background: url("../../assets/Sprites.5f05e81f.svg") no-repeat;

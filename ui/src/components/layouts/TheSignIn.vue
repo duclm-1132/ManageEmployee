@@ -216,8 +216,8 @@ export default {
 						} else {
 							//3. check password
 							if (this.data1.password == this.password) {
-								const user = this.data1;
-								router.push({ name: "HomePage", query: { user: { user } } });
+								const userId = this.data1.id;
+								router.push({ name: "HomePage", params:{userId} });
 							} else {
 								this.msg = "Sai mật khẩu";
 								this.textMutePassword = false;
