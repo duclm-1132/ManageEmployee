@@ -2,7 +2,7 @@
 	<div class="home-page">
 		<TheNavbar />
 		<div>
-			<TheHeader :user="userData" />
+			<TheHeader :user="userData"/>
 			<TheContent />
 		</div>
 
@@ -13,7 +13,7 @@
 import TheHeader from './TheHeader.vue'
 import TheNavbar from './TheNavbar.vue'
 import TheContent from './TheContent.vue'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
 	name: "HomePage",
@@ -37,22 +37,13 @@ export default {
 	},
 	methods: {
 		/**
-		 * Get User by id
+		 * Get User on cookie
 		 * CreatedBy: DucLM (21/09/2021)
 		 */
 		getUser() {
-			//get userId in route
-			const userId = this.$route.params;
-			// vì truyền qua params nên kết quả trả về là 1 object nên phải userId.userId để lấy userId
-			axios
-				.get(`http://localhost:3000/users?id=${userId.userId}`)
-				.then((response) => {
-					this.userData = response.data[0];
-					console.log(response);
-				})
-				.catch((response) => {
-					console.log(response);
-				});
+			//get user
+			this.userData = this.$cookies.get("user")
+			console.log(this.userData)
 		}
 	},
 }

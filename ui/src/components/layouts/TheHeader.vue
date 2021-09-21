@@ -31,9 +31,6 @@ export default {
 	props: {
 		user: { type: Object }
 	},
-	created() {
-
-	},
 };
 </script>
 <style scoped>
@@ -64,12 +61,13 @@ export default {
 	box-sizing: border-box;
 }
 .header__menu-dropdown {
-	background: yellow;
+	background: #f4f5f6;
 	width: 300px;
 	height: 200px;
 	position: absolute;
 	right: 24px;
 	top: 48px;
+	border-radius: 8px;
 }
 .header-icon {
 	background: url("../../assets/Sprites.5f05e81f.svg") no-repeat;

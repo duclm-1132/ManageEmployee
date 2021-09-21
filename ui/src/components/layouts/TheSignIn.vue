@@ -205,24 +205,28 @@ export default {
 			if (this.validate()) {
 				//2 call api
 				axios
-					.get(`http://localhost:3000/users?username=${this.username}`)
+					.get(`http://localhost:3000/users?username=${this.username}&&password=${this.password}`)
 					.then((response) => {
 						this.data1 = response.data[0];
 						console.log(response);
 						// check response data
-						if (!this.data1) {
-							this.msg = "Tài khoản không tồn tại."
-							this.textMuteUserName = false;
-						} else {
-							//3. check password
-							if (this.data1.password == this.password) {
-								const userId = this.data1.id;
-								router.push({ name: "HomePage", params:{userId} });
-							} else {
-								this.msg = "Sai mật khẩu";
-								this.textMutePassword = false;
-								this.$refs.password.focus();
-							}
+						// if (!this.data1) {
+						// 	this.msg = "Tài khoản không tồn tại."
+						// 	this.textMuteUserName = false;
+						// } else {
+						// 	//3. check password
+						// 	if (this.data1.password == this.password) {
+						// 		const userId = this.data1.id;
+						// 		router.push({ name: "HomePage", params:{userId} });
+						// 	} else {
+						// 		this.msg = "Sai mật khẩu";
+						// 		this.textMutePassword = false;
+						// 		this.$refs.password.focus();
+						// 	}
+						// }
+						if(response.status == 200){
+							this.$cookies.set("user",this.data1,"1h")
+							router.push({name: "HomePage"});
 						}
 					})
 					.catch((response) => {
