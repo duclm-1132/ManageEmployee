@@ -4,6 +4,7 @@
       "id": 1,
       "firstName": "Lê Minh",
       "lastName": "Đức",
+      "img":"./ui/src/assets/img/avatar-default.png",
       "companyName": "Công Ty Dược Hà Nội",
       "username": "duc1234",
       "password": "12345678"

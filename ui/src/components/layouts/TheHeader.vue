@@ -1,6 +1,6 @@
 <template>
 	<div class="header">
-		<div class="header-left">
+		<div class="header-left flex">
 			<div class="header-icon three-tripes"></div>
 			<div class="flex header-branch">
 				<div class="header-branch-name text-uppercase">
@@ -9,31 +9,72 @@
 				<div class="header-icon chevron-right"></div>
 			</div>
 		</div>
-		<div class="header-right">
+		<div class="header-right flex">
 			<button class="button">
 				<div class="flex button-text">
 					<div class="header-icon bell__nav"></div>
 				</div>
 			</button>
-			<div class="flex header-branch">
+			<div class="flex header-branch" >
 				<div class="header-icon user-avatar"></div>
 				<div class="header-branch-name">{{user.firstName}} {{user.lastName}}</div>
-				<div class="header-icon chevron-right"></div>
+				<div class="header-icon chevron-right" @click="showDropdownClick"></div>
 			</div>
-			<div class="header__menu-dropdown">
+			<div class="header__menu-dropdown" :class="{'hide' : hideDropdown}">
+				<div class="container-item flex">
+					<div class="avatar"><img
+							src="../../assets/icon/avatar-default.png"
+							alt="Ảnh đại diện"
+						></div>
+					<div class="header-branch-name">
+						<div class="text-name">
+							{{user.firstName}} {{user.lastName}}
+						</div>
+						<a href="#">
+							Thông tin tài khoản
+						</a>
+					</div>
+				</div>
 
+				<div class="item-setting flex">
+					<div class="header-icon setting__nav"></div>
+					<div class="text">Cài đặt</div>
+				</div>
+				<div class="footer">
+					<button class="btn-sign-out" @click="btnSignOutClick">Đăng xuất</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
+import router from '../../router/index'
+
 export default {
 	props: {
-		user: { type: Object }
+		user: { type: Object },
+		hideDropdown: {type: Boolean, default: true}
+	},
+	methods: {
+		btnSignOutClick(){
+			this.$cookies.remove("user");
+			router.push({path:"/"})
+		},
+		showDropdownClick(){
+			if(this.hideDropdown){
+				this.hideDropdown = false;
+			}
+			else{
+				this.hideDropdown = true;
+			}
+		}	
 	},
 };
 </script>
 <style scoped>
+.hide{
+	display: none;
+}
 .header {
 	position: absolute;
 	top: 0;
@@ -48,26 +89,74 @@ export default {
 	text-transform: uppercase;
 }
 .header .header-left {
-	display: flex;
-	align-items: center;
 	line-height: 32px;
 	box-sizing: border-box;
 }
 .header .header-right {
-	display: flex;
-	align-items: center;
 	line-height: 32px;
 	margin-right: 16px;
 	box-sizing: border-box;
 }
 .header__menu-dropdown {
-	background: #f4f5f6;
+	background: rgba(0, 0, 0, 0.04);
 	width: 300px;
 	height: 200px;
 	position: absolute;
 	right: 24px;
 	top: 48px;
 	border-radius: 8px;
+	animation: modalFaceIn ease 0.5s ;
+}
+
+.header__menu-dropdown .container-item {
+	font-size: 13px;
+	padding: 5px;
+	background-color: #d5d9dd;
+}
+
+.header__menu-dropdown .container-item a {
+	color: #0075c0;
+	cursor: pointer;
+	text-decoration: none;
+}
+.header__menu-dropdown .container-item a:hover {
+	color: #0075c0;
+	opacity: 0.7;
+}
+
+.header__menu-dropdown .avatar {
+	display: block;
+	align-items: center;
+	text-align: center;
+	padding: 0 16px;
+}
+
+.header__menu-dropdown .avatar img {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+}
+.header__menu-dropdown .item-setting {
+	padding: 5px 10px;
+}
+
+.header__menu-dropdown .footer {
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+	margin: auto;
+	width: 100%;
+}
+.header__menu-dropdown .footer .btn-sign-out {
+	padding: 8px 50px;
+	cursor: pointer;
+	border: 1px solid #000;
+	border-radius: 4px;
+}
+.header__menu-dropdown .footer .btn-sign-out:hover{
+	opacity: 0.7;
+	color: #000;
+	background: #ccc;
 }
 .header-icon {
 	background: url("../../assets/Sprites.5f05e81f.svg") no-repeat;
@@ -80,8 +169,6 @@ export default {
 	margin-right: 8px;
 }
 .header .header-branch {
-	display: flex;
-	align-items: center;
 	cursor: pointer;
 }
 .header-branch-name {
@@ -101,11 +188,6 @@ export default {
 }
 .header .space-beetween {
 	width: 20%;
-}
-.header .header-input {
-	height: 32px;
-	display: flex;
-	align-items: center;
 }
 .margin {
 	margin-right: 10px;
@@ -157,9 +239,23 @@ export default {
 	height: 32px;
 	border-radius: 50%;
 }
+@keyframes modalFaceIn {
+    from{
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 @media screen and (max-width: 1024px) {
 	.input-search {
 		width: 100px;
 	}
 }
+
+
 </style>
