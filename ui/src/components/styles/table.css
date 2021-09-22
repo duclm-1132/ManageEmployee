@@ -20,6 +20,8 @@ table thead th {
   text-align: left;
   border-right: 1px solid #bbb;
   z-index: 2;
+  min-width: 143px;
+  /* min-height: 34px; */
 }
 
 th,

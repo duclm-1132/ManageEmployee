@@ -1,13 +1,10 @@
 <template>
-	<div class="content">
+	<div class="" >
 		<div class="box">
 			<div class="content-item">
 				<div class="content-item-text">Nhân viên</div>
 				<div class="component-btn">
-					<button
-						class="btn-btn color"
-						@click="btnAddClick"
-					>
+					<button class="btn-btn color">
 						Thêm mới nhân viên
 					</button>
 				</div>
@@ -21,18 +18,10 @@
 						type="text"
 						placeholder="Tìm theo mã, tên nhân viên"
 						class="input-search2 input"
-						:value="filter"
-						@input="onChangeInputEmployeeFilter"
 					/>
 					<div
 						class="content-icon refresh"
 						title="Lấy lại dữ liệu"
-						@click="btnRefreshClick"
-					></div>
-					<div
-						class="content-icon excel__nav"
-						title="Xuất toàn bộ dữ liệu ra excel"
-						@click="btnExportClick"
 					></div>
 
 				</div>
@@ -68,7 +57,6 @@
 						<tr
 							v-for="(employee, index) in employees"
 							:key="index"
-							@dblclick="dblClickTable(employee.employeeId)"
 						>
 							<td class=" fix-left1">
 								<input
@@ -96,12 +84,7 @@
 								:style="{ 'z-index': 100 - index }"
 							>
 								<div class="btn-edit">
-									<button
-										class="btn-btn hover"
-										@click="
-                      btnEditClick(employee.employeeId, employee.employeeCode)
-                    "
-									>
+									<button class="btn-btn hover">
 										<div class="flex btn-btn-text">
 											<span
 												class="pr-4"
@@ -124,8 +107,6 @@
 					<select
 						name=""
 						id=""
-						:value="pageSize"
-						@change.prevent="onSelectedValue"
 					>
 						<option value="10">10 bản ghi trên 1 trang</option>
 						<option value="20">20 bản ghi trên 1 trang</option>
@@ -134,56 +115,6 @@
 						<option value="100">100 bản ghi trên 1 trang</option>
 					</select>
 
-					<button
-						class="style margin"
-						:class="{ disable: pageIndex == 1 }"
-						@click="onClickPag(pageIndex - 1)"
-					>
-						Trước
-					</button>
-					<button
-						class="style margin"
-						:class="{ active: pageIndex == 1 }"
-						@click="onClickPag(1)"
-					>
-						1
-					</button>
-					<button
-						v-if="pageIndex > 3"
-						class="style margin disable"
-					>...</button>
-					<button
-						v-for="p in pageIndexs"
-						:key="p"
-						class="style margin"
-						:class="{ active: pageIndexs == p }"
-						@click="onClickPag(p)"
-					>
-						{{ p }}
-					</button>
-					<button
-						v-if="pageIndex < totalPages - 3"
-						class="style margin disable"
-					>
-						...
-					</button>
-					<button
-						class="style margin"
-						:class="{
-              disable: pageIndex == totalPages,
-              display: totalPages == 1,
-            }"
-						@click="onClickPag(totalPages)"
-					>
-						{{ totalPages }}
-					</button>
-					<button
-						class="style margin"
-						:class="{ disable: pageIndex == totalPages }"
-						@click="onClickPag(pageIndex + 1)"
-					>
-						Sau
-					</button>
 				</div>
 			</div>
 		</div>
@@ -200,24 +131,50 @@
 	</div>
 </template>
 <script>
+import axios from 'axios'
 
+const myhost = "http://localhost:3000"
 export default {
 	components: {
 	},
-
+	props:{
+		colapseClick :{ type: Boolean, default: false },
+	},
 	data() {
 		return {
-
+			employees: [],
+			isBusy: false, // Trạng thái của icon Loading
 		};
 	},
 	created() {
-
+		this.loadData()
 	},
 	methods: {
+		loadData() {
+			const userData = this.$cookies.get("user")
+			this.isBusy = true;
+			axios
+				.get(myhost + `/employees?userId=${userData.id}`)
+				.then((response) => {
+					console.log(response);
+					// var employees1 = response.data;
+					// Gán tổng số bản ghi bằng độ lớn của mảng trả về
+					this.employees = response.data;
+				})
+				.catch((response) => {
+					console.log(response);
+				})
+				.then(() => {
+					// Load xong thì tắt icon load
+					this.isBusy = false;
+				});
+		}
 	}
 };
 </script>
 <style scoped>
+@import url('../../styles/table.css');
+
 .content .box {
 	padding: 22px 0px 16px 0px;
 }

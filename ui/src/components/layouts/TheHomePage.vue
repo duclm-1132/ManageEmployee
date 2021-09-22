@@ -1,9 +1,12 @@
 <template>
 	<div class="home-page">
-		<TheNavbar />
+		<TheNavbar @collapse="colapseClick" />
 		<div>
-			<TheHeader :user="userData"/>
-			<TheContent />
+			<TheHeader
+				:user="userData"
+				:colapseClick="colapse"
+			/>
+			<TheContent :colapseClick="colapse" />
 		</div>
 
 	</div>
@@ -29,6 +32,7 @@ export default {
 		return {
 			// userId: {},
 			userData: {},
+			colapse: false,
 		}
 	},
 	created() {
@@ -44,6 +48,9 @@ export default {
 			//get user
 			this.userData = this.$cookies.get("user")
 			console.log(this.userData)
+		},
+		colapseClick(res) {
+			this.colapse = res
 		}
 	},
 }

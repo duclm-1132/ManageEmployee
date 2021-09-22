@@ -1,5 +1,5 @@
 <template>
-	<div class="header">
+	<div class="header" :class="{'position-left-48' : colapseClick}">
 		<div class="header-left flex">
 			<div class="header-icon three-tripes"></div>
 			<div class="flex header-branch">
@@ -15,15 +15,24 @@
 					<div class="header-icon bell__nav"></div>
 				</div>
 			</button>
-			<div class="flex header-branch" >
-				<div class="header-icon user-avatar"></div>
+			<div class="flex header-branch">
+				<div
+					class="header-icon user-avatar"
+					@click="showDropdownClick"
+				></div>
 				<div class="header-branch-name">{{user.firstName}} {{user.lastName}}</div>
-				<div class="header-icon chevron-right" @click="showDropdownClick"></div>
+				<div
+					class="header-icon chevron-right"
+					@click="showDropdownClick"
+				></div>
 			</div>
-			<div class="header__menu-dropdown" :class="{'hide' : hideDropdown}">
+			<div
+				class="header__menu-dropdown"
+				:class="{'hide' : hideDropdown}"
+			>
 				<div class="container-item flex">
 					<div class="avatar"><img
-							src="../../assets/icon/avatar-default.png"
+							src="../../assets/img/default-avatar.jpg"
 							alt="Ảnh đại diện"
 						></div>
 					<div class="header-branch-name">
@@ -41,7 +50,10 @@
 					<div class="text">Cài đặt</div>
 				</div>
 				<div class="footer">
-					<button class="btn-sign-out" @click="btnSignOutClick">Đăng xuất</button>
+					<button
+						class="btn-sign-out"
+						@click="btnSignOutClick"
+					>Đăng xuất</button>
 				</div>
 			</div>
 		</div>
@@ -53,33 +65,49 @@ import router from '../../router/index'
 export default {
 	props: {
 		user: { type: Object },
-		hideDropdown: {type: Boolean, default: true}
+		hideDropdown: { type: Boolean, default: true },
+		colapseClick :{ type: Boolean, default: false },
+	},
+	data() {
+		return {
+			// colapseClick : false,
+		}
+	},
+	created() {
+		// this.colapseClick = this.$cookies.get("colapseClick")
+		// console.log(this.colapseClick)
 	},
 	methods: {
-		btnSignOutClick(){
+		btnSignOutClick() {
 			this.$cookies.remove("user");
-			router.push({path:"/"})
+			router.push({ path: "/" })
 		},
-		showDropdownClick(){
-			if(this.hideDropdown){
+		showDropdownClick() {
+			if (this.hideDropdown) {
 				this.hideDropdown = false;
 			}
-			else{
+			else {
 				this.hideDropdown = true;
 			}
-		}	
+		},
+		
 	},
+	
 };
 </script>
 <style scoped>
-.hide{
+.hide {
 	display: none;
+}
+
+.position-left-48{
+	left: 48px !important;
 }
 .header {
 	position: absolute;
 	top: 0;
 	left: 178px;
-	width: calc(100% - 178px);
+	right: 0;
 	height: 48px;
 	display: flex !important;
 	align-items: center;
@@ -98,14 +126,15 @@ export default {
 	box-sizing: border-box;
 }
 .header__menu-dropdown {
-	background: rgba(0, 0, 0, 0.04);
+	background: rgb(245 245 245);
 	width: 300px;
 	height: 200px;
 	position: absolute;
 	right: 24px;
 	top: 48px;
 	border-radius: 8px;
-	animation: modalFaceIn ease 0.5s ;
+	z-index: 300;
+	animation: modalFaceIn ease 0.5s;
 }
 
 .header__menu-dropdown .container-item {
@@ -153,7 +182,7 @@ export default {
 	border: 1px solid #000;
 	border-radius: 4px;
 }
-.header__menu-dropdown .footer .btn-sign-out:hover{
+.header__menu-dropdown .footer .btn-sign-out:hover {
 	opacity: 0.7;
 	color: #000;
 	background: #ccc;
@@ -240,22 +269,20 @@ export default {
 	border-radius: 50%;
 }
 @keyframes modalFaceIn {
-    from{
-        opacity: 0;
-        transform: translateY(-200px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-@media screen and (max-width: 1024px) {
-	.input-search {
-		width: 100px;
+	from {
+		opacity: 0;
+		transform: translateY(-200px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
-
+@media screen and (max-width: 1024px) {
+	/* .header {
+		top: 0;
+		left: 48px;
+	} */
+}
 </style>
