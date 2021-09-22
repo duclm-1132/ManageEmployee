@@ -205,28 +205,24 @@ export default {
 			if (this.validate()) {
 				//2 call api
 				axios
-					.get(`http://localhost:3000/users?username=${this.username}&&password=${this.password}`)
+					.get(`http://localhost:3000/users?username=${this.username}`)
 					.then((response) => {
 						this.data1 = response.data[0];
 						console.log(response);
 						// check response data
-						// if (!this.data1) {
-						// 	this.msg = "Tài khoản không tồn tại."
-						// 	this.textMuteUserName = false;
-						// } else {
-						// 	//3. check password
-						// 	if (this.data1.password == this.password) {
-						// 		const userId = this.data1.id;
-						// 		router.push({ name: "HomePage", params:{userId} });
-						// 	} else {
-						// 		this.msg = "Sai mật khẩu";
-						// 		this.textMutePassword = false;
-						// 		this.$refs.password.focus();
-						// 	}
-						// }
-						if(response.status == 200){
-							this.$cookies.set("user",this.data1,"1h")
-							router.push({name: "HomePage"});
+						if (!this.data1) {
+							this.msg = "Tài khoản không tồn tại."
+							this.textMuteUserName = false;
+						} else {
+							//3. check password
+							if (this.data1.password == this.password) {
+								this.$cookies.set("user", this.data1, "1h")
+								router.push({ name: "HomePage" });
+							} else {
+								this.msg = "Sai mật khẩu";
+								this.textMutePassword = false;
+								this.$refs.password.focus();
+							}
 						}
 					})
 					.catch((response) => {
@@ -244,7 +240,7 @@ export default {
 				this.textMuteUserName = false
 				this.textMutePassword = false
 				this.$refs.username.focus();
-			}else{
+			} else {
 				if (!this.username) {
 					this.textMuteUserName = false;
 					this.$refs.username.focus();
