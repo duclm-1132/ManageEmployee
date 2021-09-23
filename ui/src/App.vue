@@ -1,19 +1,19 @@
 <template>
 	<div id="app">
-		<!-- <TheSignIn/> -->
+		<!-- <TheSignIn /> -->
 		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-//  import TheSignIn from './components/layouts/TheSignIn.vue'
+// import TheSignIn from './components/layouts/TheSignIn.vue'
 
 export default {
-	name: 'App',
+	name: "App",
 	components: {
-		//  TheSignIn
+		// TheSignIn,
 	}
-}
+};
 </script>
 
 <style>
@@ -23,5 +23,6 @@ export default {
 	padding: 0;
 	outline: none;
 	box-sizing: border-box;
+	font-family: GoogleSans-Regular;
 }
 </style>

@@ -1,64 +1,13 @@
 <template>
-<<<<<<< HEAD
-    <div class="sign-up">
-        <div class="container">
-            <div class="container__item">
-                <div class="container--header">
-                    <div class="header-text">Đăng ký tài khoản</div>
-                    <div class="back-sign-in">
-                        <p>Tôi đã có tài khoản? 
-                            <router-link to="/" class="color-text-green"> Đăng nhập</router-link>
-                        </p>
-                    </div>
-                </div>
-                <div class="container-form">
-                    <div class="form-name">
-                        <div class="form-item firstName">
-                            <label for="firstName">Họ và tên</label>
-                            <input type="text" class="input" name="" id="firstName"  placeholder="Nhập họ và tên đệm">
-                            <span id="" class="form-text text-muted">Không được để trống</span>
-                        </div>
-                        <div class="form-item lastName">
-                            <label for="lastName">Tên</label>
-                            <input type="text" class="input" name="" id="lastName"  placeholder="Nhập tên">
-                            <span id="" class="form-text text-muted">Không được để trống</span>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label for="phoneNumber">Số điện thoại</label>
-                        <input type="text" class="input" name="" id="phoneNumber"  placeholder="Nhập số điện thoại">
-                        <span id="" class="form-text text-muted">Không được để trống</span>
-                    </div>
-                    <div class="form-item">
-                        <label for="email">Tên đăng nhập/Email</label>
-                        <input type="text" class="input" name="" id="email"  placeholder="Nhập tên đăng nhập/email">
-                        <span id="" class="form-text text-muted">Không được để trống</span>
-                    </div>
-                    <div class="form-item">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" minlength="8" class="input" name="" id="password"  placeholder="Nhập mật khẩu">
-                        <span id="" class="form-text text-muted">Không được để trống</span>
-                    </div>
-                    <div class="form-item">
-                        <input type="submit" class="input btn-submit" value="Đăng ký">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-=======
 	<div class="sign-up">
 		<div class="container">
 			<div class="container__item">
 				<div class="container--header">
 					<div class="header-text">Đăng ký tài khoản</div>
 					<div class="back-sign-in">
-						<p>Tôi đã có tài khoản?
-							<router-link
-								to="/"
-								class="color-text-green"
-							> Đăng nhập</router-link>
+						<p>
+							Tôi đã có tài khoản?
+							<router-link to="/" class="color-text-green">Đăng nhập</router-link>
 						</p>
 					</div>
 				</div>
@@ -69,48 +18,53 @@
 							<input
 								type="text"
 								class="input"
-								name=""
+								name
 								id="firstName"
 								placeholder="Nhập họ và tên đệm"
-							>
-							<span class="form-text text-muted">Không được để trống</span>
+								v-model="user.firstName"
+								ref="firstName"
+							/>
+							<div class="text-error" :class="{ 'text-muted': textMuteFirstName }">{{ msg }}</div>
 						</div>
 						<div class="form-item lastName">
 							<label for="lastName">Tên</label>
 							<input
 								type="text"
 								class="input"
-								name=""
+								name
 								id="lastName"
 								placeholder="Nhập tên"
-							>
-							<span class="form-text text-muted">Không được để trống</span>
+								v-model="user.lastName"
+								ref="lastName"
+							/>
+							<div class="text-error" :class="{ 'text-muted': textMuteLastName }">{{ msg }}</div>
 						</div>
 					</div>
 					<div class="form-item">
-						<label for="phoneNumber">Số điện thoại</label>
+						<label for="companyName">Tên công ty</label>
 						<input
 							type="text"
 							class="input"
-							name=""
-							id="phoneNumber"
-							placeholder="Nhập số điện thoại"
-						>
-						<span
-							id=""
-							class="form-text text-muted"
-						>Không được để trống</span>
+							name
+							id="companyName"
+							placeholder="Nhập tên công ty"
+							v-model="user.companyName"
+							ref="companyName"
+						/>
+						<div class="text-error" :class="{ 'text-muted': textMuteCompanyName }">{{ msg }}</div>
 					</div>
 					<div class="form-item">
-						<label for="email">Email</label>
+						<label for="username">Tên đăng nhập/Email</label>
 						<input
-							type="email"
+							type="text"
 							class="input"
-							name=""
-							id="email"
-							placeholder="Nhập email"
-						>
-						<span class="form-text text-muted">Không được để trống</span>
+							name
+							id="username"
+							placeholder="Nhập tên đăng nhập/email"
+							v-model="user.username"
+							ref="username"
+						/>
+						<div class="text-error" :class="{ 'text-muted': textMuteUsername }">{{ msg }}</div>
 					</div>
 					<div class="form-item">
 						<label for="password">Mật khẩu</label>
@@ -118,25 +72,21 @@
 							type="password"
 							minlength="8"
 							class="input"
-							name=""
+							name
 							id="password"
 							placeholder="Nhập mật khẩu"
-						>
-						<span class="form-text text-muted">Không được để trống</span>
+							v-model="user.password"
+							ref="password"
+						/>
+						<div class="text-error" :class="{ 'text-muted': textMutePassword }">{{ msg }}</div>
 					</div>
 					<div class="form-item">
-						<input
-							type="submit"
-							class="input btn-submit"
-							value="Đăng ký"
-						>
+						<input type="submit" class="input btn-submit" value="Đăng ký" @click="btnClickSignUp()" />
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
->>>>>>> feature-listEmployee
 </template>
 
 <style>
@@ -151,11 +101,13 @@
 	color: #384fd5;
 }
 
-.form-text {
-	color: red;
+.text-error {
+	color: red !important;
 	font-size: 12px;
 }
-
+.text-suscess {
+	color: #27ff00 !important;
+}
 .text-muted {
 	display: none;
 }
@@ -235,7 +187,83 @@
 </style>
 
 <script>
-export default {
+import axios from "axios";
+import router from "../../router";
 
-}
+export default {
+	name: "SignUp",
+	props: {
+		textMuteFirstName: { type: Boolean, default: true },
+		textMuteLastName: { type: Boolean, default: true },
+		textMuteCompanyName: { type: Boolean, default: true },
+		textMuteUsername: { type: Boolean, default: true },
+		textMutePassword: { type: Boolean, default: true }
+	},
+	data() {
+		return {
+			msg: "",
+			user: { type: Object }
+		};
+	},
+
+	methods: {
+		/**
+		 * validate input null
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+		validate() {
+			this.msg = "Không được để trống";
+			if (!this.user.firstName) {
+				this.textMuteFirstName = false;
+				this.$refs.firstName.focus();
+			} else {
+				this.textMuteFirstName = true;
+			}
+			if (!this.user.lastName) {
+				this.textMuteLastName = false;
+				this.$refs.lastName.focus();
+			} else {
+				this.textMuteLastName = true;
+			}
+			if (!this.user.companyName) {
+				this.textMuteCompanyName = false;
+				this.$refs.companyName.focus();
+			} else {
+				this.textMuteCompanyName = true;
+			}
+			if (!this.user.username) {
+				this.textMuteUsername = false;
+				this.$refs.username.focus();
+			} else {
+				this.textMuteUsername = true;
+			}
+			if (!this.user.password) {
+				this.textMutePassword = false;
+				this.$refs.password.focus();
+			} else {
+				this.textMutePassword = true;
+				return true;
+			}
+			return false;
+		},
+		/**
+		 * click sign up
+		 * CreatedBy: DucLM (20/09/2021)
+		 */
+		btnClickSignUp() {
+			if (this.validate()) {
+				axios
+					.post("http://localhost:3000/users", this.user)
+					.then(res => {
+						console.log(res);
+						router.push("/");
+					})
+					.catch(res => {
+						console.log(res);
+						alert("false");
+					});
+			}
+		}
+	}
+};
 </script>
