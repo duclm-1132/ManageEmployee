@@ -7,11 +7,7 @@
 					<div class="back-sign-in">
 						<p>
 							Tôi đã có tài khoản?
-							<router-link
-								to="/"
-								class="color-text-green"
-							>
-								Đăng nhập</router-link>
+							<router-link to="/" class="color-text-green">Đăng nhập</router-link>
 						</p>
 					</div>
 				</div>
@@ -22,36 +18,26 @@
 							<input
 								type="text"
 								class="input"
-								name=""
+								name
 								id="firstName"
 								placeholder="Nhập họ và tên đệm"
 								v-model="user.firstName"
 								ref="firstName"
 							/>
-							<div
-								class="text-error"
-								:class="{ 'text-muted': textMuteFirstName }"
-							>
-								{{ msg }}
-							</div>
+							<div class="text-error" :class="{ 'text-muted': textMuteFirstName }">{{ msg }}</div>
 						</div>
 						<div class="form-item lastName">
 							<label for="lastName">Tên</label>
 							<input
 								type="text"
 								class="input"
-								name=""
+								name
 								id="lastName"
 								placeholder="Nhập tên"
 								v-model="user.lastName"
 								ref="lastName"
 							/>
-							<div
-								class="text-error"
-								:class="{ 'text-muted': textMuteLastName }"
-							>
-								{{ msg }}
-							</div>
+							<div class="text-error" :class="{ 'text-muted': textMuteLastName }">{{ msg }}</div>
 						</div>
 					</div>
 					<div class="form-item">
@@ -59,64 +45,43 @@
 						<input
 							type="text"
 							class="input"
-							name=""
+							name
 							id="companyName"
 							placeholder="Nhập tên công ty"
 							v-model="user.companyName"
 							ref="companyName"
 						/>
-						<div
-							class="text-error"
-							:class="{ 'text-muted': textMuteCompanyName }"
-						>
-							{{ msg }}
-						</div>
+						<div class="text-error" :class="{ 'text-muted': textMuteCompanyName }">{{ msg }}</div>
 					</div>
 					<div class="form-item">
 						<label for="username">Tên đăng nhập/Email</label>
 						<input
 							type="text"
 							class="input"
-							name=""
+							name
 							id="username"
 							placeholder="Nhập tên đăng nhập/email"
 							v-model="user.username"
 							ref="username"
 						/>
-						<div
-							class="text-error"
-							:class="{ 'text-muted': textMuteUsername }"
-						>
-							{{ msg }}
-						</div>
+						<div class="text-error" :class="{ 'text-muted': textMuteUsername }">{{ msg }}</div>
 					</div>
-					<div class="
-							form-item">
+					<div class="form-item">
 						<label for="password">Mật khẩu</label>
 						<input
 							type="password"
 							minlength="8"
 							class="input"
-							name=""
+							name
 							id="password"
 							placeholder="Nhập mật khẩu"
 							v-model="user.password"
 							ref="password"
 						/>
-						<div
-							class="text-error"
-							:class="{ 'text-muted': textMutePassword }"
-						>
-							{{ msg }}
-						</div>
+						<div class="text-error" :class="{ 'text-muted': textMutePassword }">{{ msg }}</div>
 					</div>
 					<div class="form-item">
-						<input
-							type="submit"
-							class="input btn-submit"
-							value="Đăng ký"
-							@click="btnClickSignUp()"
-						/>
+						<input type="submit" class="input btn-submit" value="Đăng ký" @click="btnClickSignUp()" />
 					</div>
 				</div>
 			</div>
@@ -232,12 +197,12 @@ export default {
 		textMuteLastName: { type: Boolean, default: true },
 		textMuteCompanyName: { type: Boolean, default: true },
 		textMuteUsername: { type: Boolean, default: true },
-		textMutePassword: { type: Boolean, default: true },
+		textMutePassword: { type: Boolean, default: true }
 	},
 	data() {
 		return {
 			msg: "",
-			user: { type: Object },
+			user: { type: Object }
 		};
 	},
 
@@ -289,17 +254,17 @@ export default {
 			if (this.validate()) {
 				axios
 					.post("http://localhost:3000/users", this.user)
-					.then((res) => {
+					.then(res => {
 						console.log(res);
 						// alert("ok")
 						router.push("/");
 					})
-					.catch((res) => {
+					.catch(res => {
 						console.log(res);
 						alert("false");
 					});
 			}
-		},
-	},
+		}
+	}
 };
 </script>

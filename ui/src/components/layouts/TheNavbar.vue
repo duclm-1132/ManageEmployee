@@ -1,20 +1,8 @@
 <template>
-	<div
-		id="navbar"
-		:class="{ 'witdh-auto': collapse }"
-	>
-		<div
-			class="logo-container"
-			:class="{ 'witdh-auto': collapse }"
-		>
-			<div
-				class="mi mi-24 mi-logo-option"
-				@click="collapseMenu"
-			></div>
-			<div
-				class="logo-img"
-				:class="{ hide: collapse }"
-			></div>
+	<div id="navbar" :class="{ 'witdh-auto': collapse }">
+		<div class="logo-container" :class="{ 'witdh-auto': collapse }">
+			<div class="mi mi-24 mi-logo-option" @click="collapseMenu"></div>
+			<div class="logo-img" :class="{ hide: collapse }"></div>
 		</div>
 		<div class="menu-item-list">
 			<a
@@ -24,20 +12,11 @@
 				v-on:click="selectItem(0)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-dashboard"
-						title="Tổng quan"
-					></div>
+					<div class="mi mi-24 mi-sidebar-dashboard" title="Tổng quan"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Tổng quan</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Tổng quan</div>
 			</a>
-			<a
-				class="menu-item"
-				:class="{ 'witdh-auto': collapse }"
-			>
+			<a class="menu-item" :class="{ 'witdh-auto': collapse }">
 				<router-link
 					class="menu-item"
 					to="/employee"
@@ -45,17 +24,9 @@
 					v-on:click.native="selectItem(1)"
 				>
 					<div class="menu-item-icon">
-						<div
-							class="mi mi-24 mi-sidebar-cash"
-							title="Tiền mặt"
-						></div>
+						<div class="mi mi-24 mi-sidebar-cash" title="Tiền mặt"></div>
 					</div>
-					<div
-						class="menu-item-title"
-						:class="{ hide: collapse }"
-					>
-						Tiền mặt
-					</div>
+					<div class="menu-item-title" :class="{ hide: collapse }">Tiền mặt</div>
 				</router-link>
 			</a>
 
@@ -65,15 +36,9 @@
 				v-on:click="selectItem(2)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-bank"
-						title="Tiền gửi"
-					></div>
+					<div class="mi mi-24 mi-sidebar-bank" title="Tiền gửi"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Tiền gửi</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Tiền gửi</div>
 			</div>
 			<div
 				class="menu-item"
@@ -81,15 +46,9 @@
 				v-on:click="selectItem(3)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-pu"
-						title="Mua hàng"
-					></div>
+					<div class="mi mi-24 mi-sidebar-pu" title="Mua hàng"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Mua hàng</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Mua hàng</div>
 			</div>
 			<div
 				class="menu-item"
@@ -97,15 +56,9 @@
 				v-on:click="selectItem(4)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-sale"
-						title="Bán hàng"
-					></div>
+					<div class="mi mi-24 mi-sidebar-sale" title="Bán hàng"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Bán hàng</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Bán hàng</div>
 			</div>
 			<div
 				class="menu-item"
@@ -113,17 +66,9 @@
 				v-on:click="selectItem(5)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-invoice"
-						title="Quản lý hóa đơn"
-					></div>
+					<div class="mi mi-24 mi-sidebar-invoice" title="Quản lý hóa đơn"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>
-					Quản lý hoá đơn
-				</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Quản lý hoá đơn</div>
 			</div>
 			<div
 				class="menu-item"
@@ -131,15 +76,9 @@
 				v-on:click="selectItem(6)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-stock"
-						title="Kho"
-					></div>
+					<div class="mi mi-24 mi-sidebar-stock" title="Kho"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Kho</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Kho</div>
 			</div>
 			<div
 				class="menu-item"
@@ -147,35 +86,15 @@
 				v-on:click="selectItem(7)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-tools"
-						title="Công cụ dụng cụ"
-					></div>
+					<div class="mi mi-24 mi-sidebar-tools" title="Công cụ dụng cụ"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>
-					Công cụ dụng cụ
-				</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Công cụ dụng cụ</div>
 			</div>
-			<div
-				class="menu-item"
-				v-bind:class="{ active: selectedItem == 8 }"
-				v-on:click="selectItem(8)"
-			>
+			<div class="menu-item" v-bind:class="{ active: selectedItem == 8 }" v-on:click="selectItem(8)">
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-fixed-assets"
-						title="Tài sản cố định"
-					></div>
+					<div class="mi mi-24 mi-sidebar-fixed-assets" title="Tài sản cố định"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>
-					Tài sản cố định
-				</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Tài sản cố định</div>
 			</div>
 			<div
 				class="menu-item"
@@ -183,15 +102,9 @@
 				v-on:click="selectItem(9)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-tax"
-						title="Thuế"
-					></div>
+					<div class="mi mi-24 mi-sidebar-tax" title="Thuế"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Thuế</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Thuế</div>
 			</div>
 			<div
 				class="menu-item"
@@ -199,15 +112,9 @@
 				v-on:click="selectItem(10)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-price"
-						title="Giá thành"
-					></div>
+					<div class="mi mi-24 mi-sidebar-price" title="Giá thành"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Giá thành</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Giá thành</div>
 			</div>
 			<div
 				class="menu-item"
@@ -215,15 +122,9 @@
 				v-on:click="selectItem(11)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-general"
-						title="Tổng hợp"
-					></div>
+					<div class="mi mi-24 mi-sidebar-general" title="Tổng hợp"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Tổng hợp</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Tổng hợp</div>
 			</div>
 			<div
 				class="menu-item"
@@ -231,15 +132,9 @@
 				v-on:click="selectItem(12)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-budget"
-						title="Ngân sách"
-					></div>
+					<div class="mi mi-24 mi-sidebar-budget" title="Ngân sách"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Ngân sách</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Ngân sách</div>
 			</div>
 			<div
 				class="menu-item"
@@ -247,15 +142,9 @@
 				v-on:click="selectItem(13)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-report"
-						title="Báo cáo"
-					></div>
+					<div class="mi mi-24 mi-sidebar-report" title="Báo cáo"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>Báo cáo</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Báo cáo</div>
 			</div>
 			<div
 				class="menu-item"
@@ -263,17 +152,9 @@
 				v-on:click="selectItem(14)"
 			>
 				<div class="menu-item-icon">
-					<div
-						class="mi mi-24 mi-sidebar-finance"
-						title="Báo cáo tài chính"
-					></div>
+					<div class="mi mi-24 mi-sidebar-finance" title="Báo cáo tài chính"></div>
 				</div>
-				<div
-					class="menu-item-title"
-					:class="{ hide: collapse }"
-				>
-					Báo cáo tài chính
-				</div>
+				<div class="menu-item-title" :class="{ hide: collapse }">Báo cáo tài chính</div>
 			</div>
 		</div>
 	</div>
@@ -300,7 +181,13 @@ export default {
 		selectItem: function(item) {
 			this.selectedItem = item;
 		},
+		/**
+		 * collapse menu
+		 * CreatedBy:DucLM (22/09/2021)
+		 * ModifiedBy: DucLm (23/09/2021)
+		 */
 		collapseMenu() {
+			/** 
 			if (this.collapse) {
 				this.collapse = false;
 				this.$emit("collapse", this.collapse);
@@ -308,7 +195,15 @@ export default {
 				this.collapse = true;
 				this.$emit("collapse", this.collapse);
 			}
+			*/
+			//Modified
+			this.collapse = !this.collapse;
+			this.$emit("collapse", this.collapse);
 		},
+		/**
+		 * Get window width
+		 * CreatdBy: DucLM (22/09/2021)
+		 */
 		getWindowWidth() {
 			const x = window.innerWidth;
 			console.log("x=", x);
@@ -522,17 +417,5 @@ export default {
 	#navbar {
 		width: auto;
 	}
-	/* .mi-logo-option {
-		margin: auto;
-	}
-	.logo-img {
-		display: none;
-	}
-	.menu-item {
-		width: auto;
-	}
-	.menu-item .menu-item-title {
-		display: none;
-	} */
 }
 </style>

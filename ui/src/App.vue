@@ -9,11 +9,11 @@
 // import TheSignIn from './components/layouts/TheSignIn.vue'
 
 export default {
-	name: 'App',
+	name: "App",
 	components: {
 		// TheSignIn,
 	}
-}
+};
 </script>
 
 <style>

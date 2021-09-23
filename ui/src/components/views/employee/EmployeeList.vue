@@ -1,44 +1,27 @@
 <template>
-	<div class="">
+	<div class>
 		<div class="box">
 			<div class="content-item">
 				<div class="content-item-text">Nhân viên</div>
 				<div class="component-btn">
-					<button class="btn-btn color">
-						Thêm mới nhân viên
-					</button>
+					<button class="btn-btn color">Thêm mới nhân viên</button>
 				</div>
 			</div>
 		</div>
 		<div class="content-table">
 			<div class="item">
-				<div></div>
+				<div class="text-msg">{{msg}}</div>
 				<div class="item-right">
-					<input
-						type="text"
-						placeholder="Tìm theo mã, tên nhân viên"
-						class="input-search2 input"
-					/>
-					<div
-						class="content-icon refresh"
-						title="Lấy lại dữ liệu"
-						@click="btnRefreshClick"
-					></div>
-
+					<input type="text" placeholder="Tìm theo mã, tên nhân viên" class="input-search2 input" />
+					<div class="content-icon refresh" title="Lấy lại dữ liệu" @click="btnRefreshClick"></div>
 				</div>
 			</div>
 			<div class="content-table-height">
-				<table
-					class="tblListEmployee"
-					width="100%"
-				>
+				<table class="tblListEmployee" width="100%">
 					<thead>
 						<tr>
 							<td class="table-input-checkbox fix-left">
-								<input
-									type="checkbox"
-									class="check-box"
-								/>
+								<input type="checkbox" class="check-box" />
 							</td>
 							<th style="min-width: 130px; border-left:none;">MÃ NHÂN VIÊN</th>
 							<th style="min-width: 200px">TÊN NHÂN VIÊN</th>
@@ -51,83 +34,55 @@
 							<th style="min-width: 230px">TÊN NGÂN HÀNG</th>
 							<th style="min-width: 195px">CHI NHÁNH TK NGÂN HÀNG</th>
 							<th class="table-right-style">CHỨC NĂNG</th>
-
 						</tr>
 					</thead>
 					<tbody>
-						<tr
-							v-for="(employee, index) in employees"
-							:key="index"
-						>
-							<td class=" fix-left1">
-								<input
-									type="checkbox"
-									class="check-box"
-								/>
+						<tr v-for="(employee, index) in employees" :key="index">
+							<td class="fix-left1">
+								<input type="checkbox" class="check-box" />
 							</td>
 							<td>{{ employee.employeeCode }}</td>
 							<td style="min-width: 230px">{{ employee.employeeName }}</td>
 							<td>{{ employee.gender | showGender }}</td>
-							<td style="align-items: center;text-align: center;">
-								{{ employee.dateOfBirth | dateFormatDDMMYY }}
-							</td>
+							<td
+								style="align-items: center;text-align: center;"
+							>{{ employee.dateOfBirth | dateFormatDDMMYY }}</td>
 							<td style="min-width: 200px">{{ employee.identityNumber }}</td>
 							<td style="min-width: 230px">{{ employee.employeePosition }}</td>
-							<td style="min-width: 230px">
-								{{ employee.departmentId | showDepartment }}
-							</td>
+							<td style="min-width: 230px">{{ employee.departmentId | showDepartment }}</td>
 							<td>{{ employee.bankAccountNumber }}</td>
 							<td style="min-width: 230px">{{ employee.bankName }}</td>
 							<td>{{ employee.bankBranchName }}</td>
 
-							<div
-								class="table-right-style1"
-								:style="{ 'z-index': 100 - index }"
-							>
+							<div class="table-right-style1" :style="{ 'z-index': 100 - index }">
 								<div class="btn-edit">
 									<button class="btn-btn hover">
 										<div class="flex btn-btn-text">
-											<span
-												class="pr-4"
-												style="color: #0075c0; font-weight: 600"
-											>Sửa</span>
+											<span class="pr-4" style="color: #0075c0; font-weight: 600">Sửa</span>
 										</div>
 									</button>
 								</div>
-
 							</div>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="content-navpage">
-				<div class="content-navpage-text-left">
-					Tổng số: {{ totalRecord }} bản ghi
-				</div>
+				<div class="content-navpage-text-left">Tổng số: {{ totalRecord }} bản ghi</div>
 				<div class="footer-complete">
-					<select
-						name=""
-						id=""
-					>
+					<select name id>
 						<option value="10">10 bản ghi trên 1 trang</option>
 						<option value="20">20 bản ghi trên 1 trang</option>
 						<option value="30">30 bản ghi trên 1 trang</option>
 						<option value="50">50 bản ghi trên 1 trang</option>
 						<option value="100">100 bản ghi trên 1 trang</option>
 					</select>
-
 				</div>
 			</div>
 		</div>
 
-		<div
-			class="fa-3x"
-			v-if="isBusy"
-		>
-			<i
-				class="fas fa-spinner fa-spin"
-				style="color: green;"
-			></i>
+		<div class="fa-3x" v-if="isBusy">
+			<i class="fas fa-spinner fa-spin" style="color: green;"></i>
 		</div>
 	</div>
 </template>
@@ -143,7 +98,8 @@ export default {
 	data() {
 		return {
 			employees: [], // mảng danh sách nhân viên
-			isBusy: false // Trạng thái của icon Loading
+			isBusy: false, // Trạng thái của icon Loading
+			msg: ""
 		};
 	},
 	created() {
@@ -157,13 +113,17 @@ export default {
 		loadData() {
 			const userData = this.$cookies.get("user");
 			this.isBusy = true;
+			setTimeout(() => {
+				this.isBusy = false;
+			}, 5000);
 			axios
 				.get(myhost + `/employees?userId=${userData.id}`)
 				.then(response => {
 					console.log(response);
-					// var employees1 = response.data;
-					// Gán tổng số bản ghi bằng độ lớn của mảng trả về
 					this.employees = response.data;
+					if (this.employees.length == 0) {
+						this.msg = "Không có dữ liệu";
+					} else this.msg = "";
 				})
 				.catch(response => {
 					console.log(response);
@@ -322,6 +282,11 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
+.content-table .text-msg {
+	color: red;
+	font-size: 13px;
+}
+
 .tblListEmployee table tr,
 th {
 	display: table-cell;
@@ -495,5 +460,4 @@ th {
 .active {
 	font-weight: 700;
 }
-
 </style>

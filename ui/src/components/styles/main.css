@@ -1,6 +1,6 @@
 @font-face {
     font-family: "GoogleSans-Regular";
-    src: url('../../assets/font/GoogleSans-Regular.otf');
+    src: url("../../assets/font/GoogleSans-Regular.otf");
 }
 
 @import url("../../assets/font/fontawesome-5.15.1/css/all.css");
@@ -9,20 +9,20 @@
 Scroll
 */
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 10px;
+    width: 8px;
+    height: 10px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #f1f1f1;
-	border-radius: 8px;
+    background: #f1f1f1;
+    border-radius: 8px;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #bbb;
-	border-radius: 8px;
+    background: #bbb;
+    border-radius: 8px;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+    background: #555;
 }
