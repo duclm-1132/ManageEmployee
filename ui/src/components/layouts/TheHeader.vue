@@ -259,9 +259,5 @@ export default {
 }
 
 @media screen and (max-width: 1024px) {
-	/* .header {
-		top: 0;
-		left: 48px;
-	} */
 }
 </style>

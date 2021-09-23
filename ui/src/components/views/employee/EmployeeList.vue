@@ -99,7 +99,8 @@ export default {
 		return {
 			employees: [], // mảng danh sách nhân viên
 			isBusy: false, // Trạng thái của icon Loading
-			msg: ""
+			msg: "",
+			totalRecord: 0
 		};
 	},
 	created() {
@@ -112,6 +113,7 @@ export default {
 		 */
 		loadData() {
 			const userData = this.$cookies.get("user");
+			this.msg = "";
 			this.isBusy = true;
 			setTimeout(() => {
 				this.isBusy = false;
@@ -121,9 +123,10 @@ export default {
 				.then(response => {
 					console.log(response);
 					this.employees = response.data;
+					this.totalRecord = this.employees.length;
 					if (this.employees.length == 0) {
 						this.msg = "Không có dữ liệu";
-					} else this.msg = "";
+					}
 				})
 				.catch(response => {
 					console.log(response);
