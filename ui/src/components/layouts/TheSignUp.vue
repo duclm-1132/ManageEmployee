@@ -256,7 +256,6 @@ export default {
 					.post("http://localhost:3000/users", this.user)
 					.then(res => {
 						console.log(res);
-						// alert("ok")
 						router.push("/");
 					})
 					.catch(res => {

@@ -121,7 +121,6 @@ export default {
 			axios
 				.get(myhost + `/employees?userId=${userData.id}`)
 				.then(response => {
-					console.log(response);
 					this.employees = response.data;
 					this.totalRecord = this.employees.length;
 					if (this.employees.length == 0) {

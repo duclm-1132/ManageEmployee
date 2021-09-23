@@ -43,7 +43,7 @@ export default {
 		getUser() {
 			//get user
 			this.userData = this.$cookies.get("user");
-			console.log(this.userData);
+			// console.log(this.userData);
 		},
 		colapseClick(res) {
 			this.colapse = res;

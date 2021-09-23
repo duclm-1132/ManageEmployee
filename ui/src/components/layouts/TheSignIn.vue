@@ -6,6 +6,7 @@
 					<div class="logo-icon"></div>
 					<div class="logo-text">VMO</div>
 				</div>
+				<div class="text-msg res-fail" :class="{ 'text-muted': textResFail }">{{msg}}</div>
 				<div class="sign-in--form">
 					<div class="form">
 						<div class="form--input">
@@ -59,6 +60,11 @@
 
 .text-muted {
 	display: none;
+}
+
+.res-fail {
+	text-align: center;
+	margin-bottom: 10px;
 }
 .sign-in {
 	background-image: url("../../assets/img/bg_login.jpg");
@@ -159,7 +165,8 @@ export default {
 		username: { type: String },
 		password: { type: String },
 		textMuteUserName: { type: Boolean, default: true },
-		textMutePassword: { type: Boolean, default: true }
+		textMutePassword: { type: Boolean, default: true },
+		textResFail: { type: Boolean, default: true }
 	},
 	data() {
 		return {
@@ -189,7 +196,6 @@ export default {
 					)
 					.then(response => {
 						this.data1 = response.data[0];
-						console.log(response);
 						// check response data
 						if (!this.data1) {
 							this.msg = "Tài khoản không tồn tại.";
@@ -207,7 +213,8 @@ export default {
 						}
 					})
 					.catch(response => {
-						console.log(response);
+						this.msg = response.msg;
+						this.textResFail = false;
 					});
 			}
 		},
