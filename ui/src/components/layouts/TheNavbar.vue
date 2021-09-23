@@ -1,11 +1,11 @@
 <template>
 	<div
 		id="navbar"
-		:class="{'witdh-auto': collapse}"
+		:class="{ 'witdh-auto': collapse }"
 	>
 		<div
 			class="logo-container"
-			:class="{'witdh-auto': collapse}"
+			:class="{ 'witdh-auto': collapse }"
 		>
 			<div
 				class="mi mi-24 mi-logo-option"
@@ -13,14 +13,14 @@
 			></div>
 			<div
 				class="logo-img"
-				:class="{'hide' : collapse}"
+				:class="{ hide: collapse }"
 			></div>
 		</div>
 		<div class="menu-item-list">
 			<a
 				href="#"
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 0 ,'witdh-auto': collapse}"
+				v-bind:class="{ active: selectedItem == 0, 'witdh-auto': collapse }"
 				v-on:click="selectItem(0)"
 			>
 				<div class="menu-item-icon">
@@ -31,17 +31,17 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Tổng quan</div>
 			</a>
 			<a
 				class="menu-item"
-				:class="{'witdh-auto': collapse}"
+				:class="{ 'witdh-auto': collapse }"
 			>
 				<router-link
 					class="menu-item"
 					to="/employee"
-					v-bind:class="{ active: selectedItem == 1 ,'witdh-auto': collapse}"
+					v-bind:class="{ active: selectedItem == 1, 'witdh-auto': collapse }"
 					v-on:click.native="selectItem(1)"
 				>
 					<div class="menu-item-icon">
@@ -52,14 +52,16 @@
 					</div>
 					<div
 						class="menu-item-title"
-						:class="{'hide' : collapse}"
-					>Tiền mặt</div>
+						:class="{ hide: collapse }"
+					>
+						Tiền mặt
+					</div>
 				</router-link>
 			</a>
 
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 2 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 2, 'witdh-auto': collapse }"
 				v-on:click="selectItem(2)"
 			>
 				<div class="menu-item-icon">
@@ -70,12 +72,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Tiền gửi</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 3 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 3, 'witdh-auto': collapse }"
 				v-on:click="selectItem(3)"
 			>
 				<div class="menu-item-icon">
@@ -86,12 +88,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Mua hàng</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 4 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 4, 'witdh-auto': collapse }"
 				v-on:click="selectItem(4)"
 			>
 				<div class="menu-item-icon">
@@ -102,12 +104,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Bán hàng</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 5  ,'witdh-auto': collapse}"
+				v-bind:class="{ active: selectedItem == 5, 'witdh-auto': collapse }"
 				v-on:click="selectItem(5)"
 			>
 				<div class="menu-item-icon">
@@ -118,12 +120,14 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
-				>Quản lý hoá đơn</div>
+					:class="{ hide: collapse }"
+				>
+					Quản lý hoá đơn
+				</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 6 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 6, 'witdh-auto': collapse }"
 				v-on:click="selectItem(6)"
 			>
 				<div class="menu-item-icon">
@@ -134,12 +138,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Kho</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 7  ,'witdh-auto': collapse}"
+				v-bind:class="{ active: selectedItem == 7, 'witdh-auto': collapse }"
 				v-on:click="selectItem(7)"
 			>
 				<div class="menu-item-icon">
@@ -150,8 +154,10 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
-				>Công cụ dụng cụ</div>
+					:class="{ hide: collapse }"
+				>
+					Công cụ dụng cụ
+				</div>
 			</div>
 			<div
 				class="menu-item"
@@ -166,12 +172,14 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
-				>Tài sản cố định</div>
+					:class="{ hide: collapse }"
+				>
+					Tài sản cố định
+				</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 9 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 9, 'witdh-auto': collapse }"
 				v-on:click="selectItem(9)"
 			>
 				<div class="menu-item-icon">
@@ -182,12 +190,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Thuế</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 10 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 10, 'witdh-auto': collapse }"
 				v-on:click="selectItem(10)"
 			>
 				<div class="menu-item-icon">
@@ -198,12 +206,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Giá thành</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 11  ,'witdh-auto': collapse}"
+				v-bind:class="{ active: selectedItem == 11, 'witdh-auto': collapse }"
 				v-on:click="selectItem(11)"
 			>
 				<div class="menu-item-icon">
@@ -214,12 +222,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Tổng hợp</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 12  ,'witdh-auto': collapse}"
+				v-bind:class="{ active: selectedItem == 12, 'witdh-auto': collapse }"
 				v-on:click="selectItem(12)"
 			>
 				<div class="menu-item-icon">
@@ -230,12 +238,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Ngân sách</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 13 ,'witdh-auto': collapse }"
+				v-bind:class="{ active: selectedItem == 13, 'witdh-auto': collapse }"
 				v-on:click="selectItem(13)"
 			>
 				<div class="menu-item-icon">
@@ -246,12 +254,12 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
+					:class="{ hide: collapse }"
 				>Báo cáo</div>
 			</div>
 			<div
 				class="menu-item"
-				v-bind:class="{ active: selectedItem == 14  ,'witdh-auto': collapse}"
+				v-bind:class="{ active: selectedItem == 14, 'witdh-auto': collapse }"
 				v-on:click="selectItem(14)"
 			>
 				<div class="menu-item-icon">
@@ -262,64 +270,56 @@
 				</div>
 				<div
 					class="menu-item-title"
-					:class="{'hide' : collapse}"
-				>Báo cáo tài chính</div>
+					:class="{ hide: collapse }"
+				>
+					Báo cáo tài chính
+				</div>
 			</div>
 		</div>
-		<!-- <TheHeader :colapseClick="collapse" /> -->
 	</div>
 </template>
 
 <script>
-// import TheHeader from './TheHeader.vue'
 export default {
 	name: "MyNavbar",
-	components: {
-
-	},
-	props: {
-		// collapse: { type: Boolean, default: false },
-	},
-	data: function () {
+	components: {},
+	data: function() {
 		return {
 			selectedItem: 0,
-			collapse: false,
+			collapse: false
 		};
 	},
 	created() {
-		window.addEventListener('resize', this.getWindowWidth);
-		this.getWindowWidth()
+		window.addEventListener("resize", this.getWindowWidth);
+		this.getWindowWidth();
 	},
 	destroyed() {
-		window.removeEventListener('resize', this.getWindowWidth);
+		window.removeEventListener("resize", this.getWindowWidth);
 	},
 	methods: {
-		selectItem: function (item) {
+		selectItem: function(item) {
 			this.selectedItem = item;
 		},
 		collapseMenu() {
 			if (this.collapse) {
-				this.collapse = false
-				this.$emit("collapse", this.collapse)
-				// this.$cookies.set("colapseClick", this.collapse, "1h")
-			}
-			else {
-				this.collapse = true
-				this.$emit("collapse", this.collapse)
-				// this.$cookies.set("colapseClick", this.collapse, "1h")
+				this.collapse = false;
+				this.$emit("collapse", this.collapse);
+			} else {
+				this.collapse = true;
+				this.$emit("collapse", this.collapse);
 			}
 		},
 		getWindowWidth() {
 			const x = window.innerWidth;
-			console.log("x=", x)
+			console.log("x=", x);
 			if (x <= 1024) {
-				this.collapse = true
+				this.collapse = true;
 			} else {
-				this.collapse = false
+				this.collapse = false;
 			}
-			this.$emit("collapse", this.collapse)
+			this.$emit("collapse", this.collapse);
 		}
-	},
+	}
 };
 </script>
 
@@ -361,6 +361,9 @@ export default {
 }
 .menu-item-list {
 	padding-top: 14px;
+	height: calc(100vh - 49px);
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .menu-item {
 	width: 178px;
@@ -509,6 +512,10 @@ export default {
 
 .active .mi-sidebar-budget {
 	background-position: -423px -1659px;
+}
+::-webkit-scrollbar {
+	width: 7px;
+	height: 10px;
 }
 
 @media screen and (max-width: 1024px) {

@@ -1,5 +1,5 @@
 <template>
-	<div class="" >
+	<div class="">
 		<div class="box">
 			<div class="content-item">
 				<div class="content-item-text">Nhân viên</div>
@@ -22,6 +22,7 @@
 					<div
 						class="content-icon refresh"
 						title="Lấy lại dữ liệu"
+						@click="btnRefreshClick"
 					></div>
 
 				</div>
@@ -131,49 +132,59 @@
 	</div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 
-const myhost = "http://localhost:3000"
+const myhost = "http://localhost:3000";
 export default {
-	components: {
-	},
-	props:{
-		colapseClick :{ type: Boolean, default: false },
+	components: {},
+	props: {
+		colapseClick: { type: Boolean, default: false } // responsive khi đóng mở navbar
 	},
 	data() {
 		return {
-			employees: [],
-			isBusy: false, // Trạng thái của icon Loading
+			employees: [], // mảng danh sách nhân viên
+			isBusy: false // Trạng thái của icon Loading
 		};
 	},
 	created() {
-		this.loadData()
+		this.loadData();
 	},
 	methods: {
+		/**
+		 * funtion load data
+		 * CreatedBy: DucLM (23/09/2021)
+		 */
 		loadData() {
-			const userData = this.$cookies.get("user")
+			const userData = this.$cookies.get("user");
 			this.isBusy = true;
 			axios
 				.get(myhost + `/employees?userId=${userData.id}`)
-				.then((response) => {
+				.then(response => {
 					console.log(response);
 					// var employees1 = response.data;
 					// Gán tổng số bản ghi bằng độ lớn của mảng trả về
 					this.employees = response.data;
 				})
-				.catch((response) => {
+				.catch(response => {
 					console.log(response);
 				})
 				.then(() => {
 					// Load xong thì tắt icon load
 					this.isBusy = false;
 				});
+		},
+		/**
+		 * click button refresh -> call load data
+		 * CreatedBy: DucLM (23/09/2021)
+		 */
+		btnRefreshClick() {
+			this.loadData();
 		}
 	}
 };
 </script>
 <style scoped>
-@import url('../../styles/table.css');
+@import url("../../styles/table.css");
 
 .content .box {
 	padding: 22px 0px 16px 0px;
@@ -317,7 +328,7 @@ th {
 	cursor: pointer;
 	padding: 0 10px;
 }
-.tblListEmployee table tr:hover {
+.tblListEmployee table tbody tr:hover {
 	background-color: #d4f0f0;
 }
 .tblListEmployee .fix-left {
@@ -335,14 +346,9 @@ th {
 	display: table-cell;
 	left: 0px;
 	border-right: 1px dotted #c7c7c7;
-	/* max-width: 40px !important;
-  
-  width: 34px; */
 }
 .tblListEmployee .table-right-style {
 	min-width: 120px;
-	/* position: relative; */
-	/* display: flex; */
 	top: 0px;
 	right: 0;
 	align-items: center;
@@ -351,7 +357,6 @@ th {
 	width: 60px;
 	border-left: 1px solid #c7c7c7;
 	z-index: 101;
-	/* border-left: 1px dotted #c7c7c7; */
 }
 .tblListEmployee .table-right-style1 {
 	min-width: 120px;
@@ -364,7 +369,6 @@ th {
 	padding: 0 18px;
 	border-right: none;
 	width: 60px;
-	/* z-index: 6; */
 	border-left: 1px dotted #c7c7c7;
 	background: #fff;
 }
@@ -373,7 +377,6 @@ th {
 	background-color: #eceef1;
 	max-width: 40px !important;
 	align-items: center;
-	/* display: flex; */
 	width: 40px;
 }
 .item .item-right {
@@ -406,15 +409,11 @@ th {
 	right: 24px;
 	box-sizing: border-box;
 	left: 16px;
-	/* border-top: 1px solid #a29d9d; */
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
 }
 
-/* .content-navpage .content-navpage-text-left {
-  margin-left: 10px;
-} */
 .content-navpage .content-navpage-button {
 	display: flex;
 }
@@ -431,8 +430,7 @@ th {
 .padding {
 	padding: 0 0 0 10px;
 }
-/* .hoverxx {
-} */
+
 .hoverxx:hover {
 	background-color: #eceaea;
 }
@@ -441,7 +439,6 @@ th {
 	left: 45%;
 	top: 43%;
 	transform: translate(-50%, -50%);
-	/* background-image: url('../../../assets/loading.svg'); */
 }
 
 .dropdown {
@@ -498,25 +495,5 @@ th {
 .active {
 	font-weight: 700;
 }
-/**
-Scroll
-*/
-::-webkit-scrollbar {
-	width: 8px;
-	height: 10px;
-}
-/* Track */
-::-webkit-scrollbar-track {
-	background: #f1f1f1;
-	border-radius: 8px;
-}
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: #bbb;
-	border-radius: 8px;
-}
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: #555;
-}
+
 </style>
