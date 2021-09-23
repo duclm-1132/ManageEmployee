@@ -1,18 +1,17 @@
 <template>
 	<div class="home-page">
-		<TheNavbar />
+		<TheNavbar @collapse="colapseClick" />
 		<div>
-			<TheHeader :user="userData"/>
-			<TheContent />
+			<TheHeader :user="userData" :colapseClick="colapse" />
+			<TheContent :colapseClick="colapse" />
 		</div>
-
 	</div>
 </template>
 
 <script>
-import TheHeader from './TheHeader.vue'
-import TheNavbar from './TheNavbar.vue'
-import TheContent from './TheContent.vue'
+import TheHeader from "./TheHeader.vue";
+import TheNavbar from "./TheNavbar.vue";
+import TheContent from "./TheContent.vue";
 // import axios from 'axios'
 
 export default {
@@ -29,7 +28,8 @@ export default {
 		return {
 			// userId: {},
 			userData: {},
-		}
+			colapse: false
+		};
 	},
 	created() {
 		// this.userData = this.$route.query;
@@ -42,11 +42,14 @@ export default {
 		 */
 		getUser() {
 			//get user
-			this.userData = this.$cookies.get("user")
-			console.log(this.userData)
+			this.userData = this.$cookies.get("user");
+			// console.log(this.userData);
+		},
+		colapseClick(res) {
+			this.colapse = res;
 		}
-	},
-}
+	}
+};
 </script>
 
 <style>
