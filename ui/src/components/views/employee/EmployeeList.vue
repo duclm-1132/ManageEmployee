@@ -1,27 +1,54 @@
 <template>
-	<div class>
+	<div class="content">
 		<div class="box">
 			<div class="content-item">
 				<div class="content-item-text">Nhân viên</div>
 				<div class="component-btn">
-					<button class="btn-btn color">Thêm mới nhân viên</button>
+					<button
+						class="btn-btn color"
+						@click="btnAddClick"
+					>
+						Thêm mới nhân viên
+					</button>
 				</div>
 			</div>
 		</div>
 		<div class="content-table">
 			<div class="item">
-				<div class="text-msg">{{msg}}</div>
+				<div></div>
 				<div class="item-right">
-					<input type="text" placeholder="Tìm theo mã, tên nhân viên" class="input-search2 input" />
-					<div class="content-icon refresh" title="Lấy lại dữ liệu" @click="btnRefreshClick"></div>
+					<input
+						type="text"
+						placeholder="Tìm theo mã, tên nhân viên"
+						class="input-search2 input"
+						:value="filter"
+						@input="onChangeInputEmployeeFilter"
+					/>
+					<div
+						class="content-icon refresh"
+						title="Lấy lại dữ liệu"
+						@click="btnRefreshClick"
+					></div>
+					<div
+						class="content-icon excel__nav"
+						title="Xuất toàn bộ dữ liệu ra excel"
+						@click="btnExportClick"
+					></div>
+
 				</div>
 			</div>
 			<div class="content-table-height">
-				<table class="tblListEmployee" width="100%">
+				<table
+					class="tblListEmployee"
+					width="100%"
+				>
 					<thead>
 						<tr>
 							<td class="table-input-checkbox fix-left">
-								<input type="checkbox" class="check-box" />
+								<input
+									type="checkbox"
+									class="check-box"
+								/>
 							</td>
 							<th style="min-width: 130px; border-left:none;">MÃ NHÂN VIÊN</th>
 							<th style="min-width: 200px">TÊN NHÂN VIÊN</th>
@@ -34,120 +61,163 @@
 							<th style="min-width: 230px">TÊN NGÂN HÀNG</th>
 							<th style="min-width: 195px">CHI NHÁNH TK NGÂN HÀNG</th>
 							<th class="table-right-style">CHỨC NĂNG</th>
+
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(employee, index) in employees" :key="index">
-							<td class="fix-left1">
-								<input type="checkbox" class="check-box" />
+						<tr
+							v-for="(employee, index) in employees"
+							:key="index"
+							@dblclick="dblClickTable(employee.employeeId)"
+						>
+							<td class=" fix-left1">
+								<input
+									type="checkbox"
+									class="check-box"
+								/>
 							</td>
 							<td>{{ employee.employeeCode }}</td>
 							<td style="min-width: 230px">{{ employee.employeeName }}</td>
 							<td>{{ employee.gender | showGender }}</td>
-							<td
-								style="align-items: center;text-align: center;"
-							>{{ employee.dateOfBirth | dateFormatDDMMYY }}</td>
+							<td style="align-items: center;text-align: center;">
+								{{ employee.dateOfBirth | dateFormatDDMMYY }}
+							</td>
 							<td style="min-width: 200px">{{ employee.identityNumber }}</td>
 							<td style="min-width: 230px">{{ employee.employeePosition }}</td>
-							<td style="min-width: 230px">{{ employee.departmentId | showDepartment }}</td>
+							<td style="min-width: 230px">
+								{{ employee.departmentId | showDepartment }}
+							</td>
 							<td>{{ employee.bankAccountNumber }}</td>
 							<td style="min-width: 230px">{{ employee.bankName }}</td>
 							<td>{{ employee.bankBranchName }}</td>
 
-							<div class="table-right-style1" :style="{ 'z-index': 100 - index }">
+							<div
+								class="table-right-style1"
+								:style="{ 'z-index': 100 - index }"
+							>
 								<div class="btn-edit">
-									<button class="btn-btn hover">
+									<button
+										class="btn-btn hover"
+										@click="
+                      btnEditClick(employee.employeeId, employee.employeeCode)
+                    "
+									>
 										<div class="flex btn-btn-text">
-											<span class="pr-4" style="color: #0075c0; font-weight: 600">Sửa</span>
+											<span
+												class="pr-4"
+												style="color: #0075c0; font-weight: 600"
+											>Sửa</span>
 										</div>
 									</button>
 								</div>
+
 							</div>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="content-navpage">
-				<div class="content-navpage-text-left">Tổng số: {{ totalRecord }} bản ghi</div>
+				<div class="content-navpage-text-left">
+					Tổng số: {{ totalRecord }} bản ghi
+				</div>
 				<div class="footer-complete">
-					<select name id>
+					<select
+						name=""
+						id=""
+						:value="pageSize"
+						@change.prevent="onSelectedValue"
+					>
 						<option value="10">10 bản ghi trên 1 trang</option>
 						<option value="20">20 bản ghi trên 1 trang</option>
 						<option value="30">30 bản ghi trên 1 trang</option>
 						<option value="50">50 bản ghi trên 1 trang</option>
 						<option value="100">100 bản ghi trên 1 trang</option>
 					</select>
+
+					<button
+						class="style margin"
+						:class="{ disable: pageIndex == 1 }"
+						@click="onClickPag(pageIndex - 1)"
+					>
+						Trước
+					</button>
+					<button
+						class="style margin"
+						:class="{ active: pageIndex == 1 }"
+						@click="onClickPag(1)"
+					>
+						1
+					</button>
+					<button
+						v-if="pageIndex > 3"
+						class="style margin disable"
+					>...</button>
+					<button
+						v-for="p in pageIndexs"
+						:key="p"
+						class="style margin"
+						:class="{ active: pageIndexs == p }"
+						@click="onClickPag(p)"
+					>
+						{{ p }}
+					</button>
+					<button
+						v-if="pageIndex < totalPages - 3"
+						class="style margin disable"
+					>
+						...
+					</button>
+					<button
+						class="style margin"
+						:class="{
+              disable: pageIndex == totalPages,
+              display: totalPages == 1,
+            }"
+						@click="onClickPag(totalPages)"
+					>
+						{{ totalPages }}
+					</button>
+					<button
+						class="style margin"
+						:class="{ disable: pageIndex == totalPages }"
+						@click="onClickPag(pageIndex + 1)"
+					>
+						Sau
+					</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="fa-3x" v-if="isBusy">
-			<i class="fas fa-spinner fa-spin" style="color: green;"></i>
+		<div
+			class="fa-3x"
+			v-if="isBusy"
+		>
+			<i
+				class="fas fa-spinner fa-spin"
+				style="color: green;"
+			></i>
 		</div>
 	</div>
 </template>
 <script>
-import axios from "axios";
 
-const myhost = "http://localhost:3000";
 export default {
-	components: {},
-	props: {
-		colapseClick: { type: Boolean, default: false } // responsive khi đóng mở navbar
+	components: {
 	},
+
 	data() {
 		return {
-			employees: [], // mảng danh sách nhân viên
-			isBusy: false, // Trạng thái của icon Loading
-			msg: "",
-			totalRecord: 0
+
 		};
 	},
 	created() {
-		this.loadData();
+
 	},
 	methods: {
-		/**
-		 * funtion load data
-		 * CreatedBy: DucLM (23/09/2021)
-		 */
-		loadData() {
-			const userData = this.$cookies.get("user");
-			this.msg = "";
-			this.isBusy = true;
-			setTimeout(() => {
-				this.isBusy = false;
-			}, 5000);
-			axios
-				.get(myhost + `/employees?userId=${userData.id}`)
-				.then(response => {
-					this.employees = response.data;
-					this.totalRecord = this.employees.length;
-					if (this.employees.length == 0) {
-						this.msg = "Không có dữ liệu";
-					}
-				})
-				.catch(response => {
-					console.log(response);
-				})
-				.then(() => {
-					// Load xong thì tắt icon load
-					this.isBusy = false;
-				});
-		},
-		/**
-		 * click button refresh -> call load data
-		 * CreatedBy: DucLM (23/09/2021)
-		 */
-		btnRefreshClick() {
-			this.loadData();
-		}
 	}
 };
 </script>
 <style scoped>
-@import url("../../styles/table.css");
-
 .content .box {
 	padding: 22px 0px 16px 0px;
 }
@@ -284,18 +354,13 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
-.content-table .text-msg {
-	color: red;
-	font-size: 13px;
-}
-
 .tblListEmployee table tr,
 th {
 	display: table-cell;
 	cursor: pointer;
 	padding: 0 10px;
 }
-.tblListEmployee table tbody tr:hover {
+.tblListEmployee table tr:hover {
 	background-color: #d4f0f0;
 }
 .tblListEmployee .fix-left {
@@ -313,9 +378,14 @@ th {
 	display: table-cell;
 	left: 0px;
 	border-right: 1px dotted #c7c7c7;
+	/* max-width: 40px !important;
+  
+  width: 34px; */
 }
 .tblListEmployee .table-right-style {
 	min-width: 120px;
+	/* position: relative; */
+	/* display: flex; */
 	top: 0px;
 	right: 0;
 	align-items: center;
@@ -324,6 +394,7 @@ th {
 	width: 60px;
 	border-left: 1px solid #c7c7c7;
 	z-index: 101;
+	/* border-left: 1px dotted #c7c7c7; */
 }
 .tblListEmployee .table-right-style1 {
 	min-width: 120px;
@@ -336,6 +407,7 @@ th {
 	padding: 0 18px;
 	border-right: none;
 	width: 60px;
+	/* z-index: 6; */
 	border-left: 1px dotted #c7c7c7;
 	background: #fff;
 }
@@ -344,6 +416,7 @@ th {
 	background-color: #eceef1;
 	max-width: 40px !important;
 	align-items: center;
+	/* display: flex; */
 	width: 40px;
 }
 .item .item-right {
@@ -376,11 +449,15 @@ th {
 	right: 24px;
 	box-sizing: border-box;
 	left: 16px;
+	/* border-top: 1px solid #a29d9d; */
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
 }
 
+/* .content-navpage .content-navpage-text-left {
+  margin-left: 10px;
+} */
 .content-navpage .content-navpage-button {
 	display: flex;
 }
@@ -397,7 +474,8 @@ th {
 .padding {
 	padding: 0 0 0 10px;
 }
-
+/* .hoverxx {
+} */
 .hoverxx:hover {
 	background-color: #eceaea;
 }
@@ -406,6 +484,7 @@ th {
 	left: 45%;
 	top: 43%;
 	transform: translate(-50%, -50%);
+	/* background-image: url('../../../assets/loading.svg'); */
 }
 
 .dropdown {
@@ -461,5 +540,26 @@ th {
 }
 .active {
 	font-weight: 700;
+}
+/**
+Scroll
+*/
+::-webkit-scrollbar {
+	width: 8px;
+	height: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 8px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #bbb;
+	border-radius: 8px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }
 </style>

@@ -6,7 +6,6 @@
 					<div class="logo-icon"></div>
 					<div class="logo-text">VMO</div>
 				</div>
-				<div class="text-msg res-fail" :class="{ 'text-muted': textResFail }">{{msg}}</div>
 				<div class="sign-in--form">
 					<div class="form">
 						<div class="form--input">
@@ -18,9 +17,12 @@
 								name="username"
 								ref="username"
 								placeholder="Tên đăng nhập/email"
-								id
+								id=""
 							/>
-							<div class="text-msg" :class="{ 'text-muted': textMuteUserName }">{{msg}}</div>
+							<div
+								class="text-msg"
+								:class="{ 'text-muted': textMuteUserName }"
+							>{{msg}}</div>
 						</div>
 						<div class="form--input">
 							<input
@@ -29,21 +31,35 @@
 								required
 								class="input"
 								ref="password"
-								name
+								name=""
 								placeholder="Mật khẩu"
-								id
+								id=""
 							/>
-							<div class="text-msg" :class="{ 'text-muted': textMutePassword }">{{msg}}</div>
+							<div
+								class="text-msg"
+								:class="{ 'text-muted': textMutePassword }"
+							>{{msg}}</div>
 						</div>
 						<div class="form--forgot-password">
-							<a href="#" class="color-text">Quên mật khẩu?</a>
+							<a
+								href="#"
+								class="color-text"
+							>Quên mật khẩu?</a>
 						</div>
 						<div class="form--input">
-							<input type="submit" @click="btnSignInClick()" class="input form--btn" value="Đăng nhập" />
+							<input
+								type="submit"
+								@click="btnSignInClick()"
+								class="input form--btn"
+								value="Đăng nhập"
+							/>
 						</div>
 						<div class="form--sign-up">
 							Chưa có công ty?
-							<a @click="clickSignUp()" class="color-text">Đăng ký</a>
+							<a
+								@click="clickSignUp()"
+								class="color-text"
+							>Đăng ký</a>
 						</div>
 					</div>
 				</div>
@@ -60,11 +76,6 @@
 
 .text-muted {
 	display: none;
-}
-
-.res-fail {
-	text-align: center;
-	margin-bottom: 10px;
 }
 .sign-in {
 	background-image: url("../../assets/img/bg_login.jpg");
@@ -160,21 +171,24 @@ import axios from "axios";
 import router from "../../router";
 
 export default {
-	components: {},
+	components: {
+
+	},
 	props: {
 		username: { type: String },
 		password: { type: String },
 		textMuteUserName: { type: Boolean, default: true },
 		textMutePassword: { type: Boolean, default: true },
-		textResFail: { type: Boolean, default: true }
 	},
 	data() {
 		return {
 			data1: {},
-			msg: ""
+			msg: "",
 		};
 	},
-	created() {},
+	created() {
+
+	},
 	methods: {
 		/**
 		 * sign in click
@@ -191,19 +205,18 @@ export default {
 			if (this.validate()) {
 				//2 call api
 				axios
-					.get(
-						`http://localhost:3000/users?username=${this.username}`
-					)
-					.then(response => {
+					.get(`http://localhost:3000/users?username=${this.username}`)
+					.then((response) => {
 						this.data1 = response.data[0];
+						console.log(response);
 						// check response data
 						if (!this.data1) {
-							this.msg = "Tài khoản không tồn tại.";
+							this.msg = "Tài khoản không tồn tại."
 							this.textMuteUserName = false;
 						} else {
 							//3. check password
 							if (this.data1.password == this.password) {
-								this.$cookies.set("user", this.data1, "1h");
+								this.$cookies.set("user", this.data1, "1h")
 								router.push({ name: "HomePage" });
 							} else {
 								this.msg = "Sai mật khẩu";
@@ -212,9 +225,8 @@ export default {
 							}
 						}
 					})
-					.catch(response => {
-						this.msg = response.msg;
-						this.textResFail = false;
+					.catch((response) => {
+						console.log(response);
 					});
 			}
 		},
@@ -223,10 +235,10 @@ export default {
 		 * CreatedBy: DucLM (20/09/2021)
 		 */
 		validate() {
-			this.msg = "Không được để trống";
+			this.msg = "Không được để trống"
 			if (!this.username && !this.password) {
-				this.textMuteUserName = false;
-				this.textMutePassword = false;
+				this.textMuteUserName = false
+				this.textMutePassword = false
 				this.$refs.username.focus();
 			} else {
 				if (!this.username) {
@@ -242,6 +254,7 @@ export default {
 					this.textMutePassword = true;
 					return true;
 				}
+
 			}
 			return false;
 		},
@@ -250,8 +263,8 @@ export default {
 		 * CreatedBy: DucLM (20/09/2021)
 		 */
 		clickSignUp() {
-			router.push({ name: "SignUp" });
+			router.push({ name: "SignUp" })
 		}
-	}
+	},
 };
 </script>
