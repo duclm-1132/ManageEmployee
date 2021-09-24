@@ -4,7 +4,7 @@
       "id": 1,
       "firstName": "Lê Minh",
       "lastName": "Đức",
-      "img":"./ui/src/assets/img/avatar-default.png",
+      "img": "./ui/src/assets/img/avatar-default.png",
       "companyName": "Công Ty Dược Hà Nội",
       "username": "duc1234",
       "password": "12345678"
@@ -52,7 +52,7 @@
   ],
   "employees": [
     {
-      "userId": 1,
+      "userId": 3,
       "employeeId": "541fbd9b-a0c4-11eb-8a1f-00163e047e89",
       "employeeCode": "Nv4d3333223",
       "employeeName": "nguy33333en van a",

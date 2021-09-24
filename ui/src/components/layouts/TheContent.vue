@@ -5,8 +5,8 @@
 </template>
 <script>
 export default {
-	props:{
-		colapseClick :{ type: Boolean, default: false },
+	props: {
+		colapseClick: { type: Boolean, default: false }
 	}
 };
 </script>
@@ -20,7 +20,7 @@ export default {
 	background-color: #f4f5f6;
 	padding: 0px 30px 0px 20px;
 }
-.position-left-48{
+.position-left-48 {
 	left: 48px !important;
 }
 @media screen and (max-width: 1024px) {
@@ -29,5 +29,4 @@ export default {
 		left: 48px;
 	} */
 }
-
 </style>

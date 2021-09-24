@@ -3,9 +3,7 @@
 		<div class="header-left flex">
 			<div class="header-icon three-tripes"></div>
 			<div class="flex header-branch">
-				<div class="header-branch-name text-uppercase">
-					{{user.companyName}}
-				</div>
+				<div class="header-branch-name text-uppercase">{{user.companyName}}</div>
 				<div class="header-icon chevron-right"></div>
 			</div>
 		</div>
@@ -16,32 +14,18 @@
 				</div>
 			</button>
 			<div class="flex header-branch">
-				<div
-					class="header-icon user-avatar"
-					@click="showDropdownClick"
-				></div>
+				<div class="header-icon user-avatar" @click="showDropdownClick"></div>
 				<div class="header-branch-name">{{user.firstName}} {{user.lastName}}</div>
-				<div
-					class="header-icon chevron-right"
-					@click="showDropdownClick"
-				></div>
+				<div class="header-icon chevron-right" @click="showDropdownClick"></div>
 			</div>
-			<div
-				class="header__menu-dropdown"
-				:class="{'hide' : hideDropdown}"
-			>
+			<div class="header__menu-dropdown" :class="{'hide' : hideDropdown}">
 				<div class="container-item flex">
-					<div class="avatar"><img
-							src="../../assets/img/default-avatar.jpg"
-							alt="Ảnh đại diện"
-						></div>
+					<div class="avatar">
+						<img src="../../assets/img/default-avatar.jpg" alt="Ảnh đại diện" />
+					</div>
 					<div class="header-branch-name">
-						<div class="text-name">
-							{{user.firstName}} {{user.lastName}}
-						</div>
-						<a href="#">
-							Thông tin tài khoản
-						</a>
+						<div class="text-name">{{user.firstName}} {{user.lastName}}</div>
+						<a href="#">Thông tin tài khoản</a>
 					</div>
 				</div>
 
@@ -50,49 +34,44 @@
 					<div class="text">Cài đặt</div>
 				</div>
 				<div class="footer">
-					<button
-						class="btn-sign-out"
-						@click="btnSignOutClick"
-					>Đăng xuất</button>
+					<button class="btn-sign-out" @click="btnSignOutClick">Đăng xuất</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-import router from '../../router/index'
+import router from "../../router/index";
 
 export default {
 	props: {
 		user: { type: Object },
 		hideDropdown: { type: Boolean, default: true },
-		colapseClick :{ type: Boolean, default: false },
+		colapseClick: { type: Boolean, default: false }
 	},
 	data() {
-		return {
-			// colapseClick : false,
-		}
+		return {};
 	},
-	created() {
-		// this.colapseClick = this.$cookies.get("colapseClick")
-		// console.log(this.colapseClick)
-	},
+	created() {},
 	methods: {
+		/**
+		 * click sign-out
+		 * CreateBy: DucLM (22/09/2021)
+		 * ModifiedBy: DucLM (23/09/2021)
+		 * Detail Modified: chuyển hướng thẳng về trang login chứ không cần xóa cookies
+		 */
 		btnSignOutClick() {
-			this.$cookies.remove("user");
-			router.push({ path: "/" })
+			router.push({ path: "/" });
 		},
+		/**
+		 * show dropdown
+		 * CreatedBy: DucLM (22/09/2021)
+		 * ModifiedBy: DucLM (23/09/2021)
+		 */
 		showDropdownClick() {
-			if (this.hideDropdown) {
-				this.hideDropdown = false;
-			}
-			else {
-				this.hideDropdown = true;
-			}
-		},
-		
-	},
-	
+			this.hideDropdown = !this.hideDropdown;
+		}
+	}
 };
 </script>
 <style scoped>
@@ -100,7 +79,7 @@ export default {
 	display: none;
 }
 
-.position-left-48{
+.position-left-48 {
 	left: 48px !important;
 }
 .header {
@@ -280,9 +259,5 @@ export default {
 }
 
 @media screen and (max-width: 1024px) {
-	/* .header {
-		top: 0;
-		left: 48px;
-	} */
 }
 </style>
