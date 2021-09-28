@@ -1,10 +1,10 @@
 <template>
-	<div class>
+	<div>
 		<div class="box">
 			<div class="content-item">
 				<div class="content-item-text">Nhân viên</div>
 				<div class="component-btn">
-					<button class="btn-btn color">Thêm mới nhân viên</button>
+					<button class="btn-btn color" @click="btnAdd">Thêm mới nhân viên</button>
 				</div>
 			</div>
 		</div>
@@ -37,7 +37,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(employee, index) in employees" :key="index">
+						<tr
+							v-for="(employee, index) in employees"
+							:key="index"
+							@dblclick="dblClickTable(employee.id)"
+						>
 							<td class="fix-left1">
 								<input type="checkbox" class="check-box" />
 							</td>
@@ -58,10 +62,15 @@
 								<div class="btn-edit">
 									<button class="btn-btn hover">
 										<div class="flex btn-btn-text">
-											<span class="pr-4" style="color: #0075c0; font-weight: 600">Sửa</span>
+											<span
+												class="pr-4"
+												style="color: #0075c0; font-weight: 600"
+												@click="btnEditClick(employee.id, employee.employeeCode)"
+											>Sửa</span>
 										</div>
 									</button>
 								</div>
+								<div class="btn-delete" @click="btnDeleteClick(employee.id, employee.employeeCode)">Xóa</div>
 							</div>
 						</tr>
 					</tbody>
@@ -80,18 +89,36 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- load icon -->
 		<div class="fa-3x" v-if="isBusy">
 			<i class="fas fa-spinner fa-spin" style="color: green;"></i>
 		</div>
+		<EmployeeDetail
+			:employee="selectEmployee"
+			:flag="status"
+			:hide="hide"
+			@hideDialogNotLoad="hideDialogNotLoad"
+			@hideDialog="hideDialog"
+		/>
+		<Popup
+			:employeeClickCode="recordCode"
+			:employeeClickId="recordId"
+			:hidePopup="popHide"
+			@hidePopup="hidePopup"
+		/>
 	</div>
 </template>
 <script>
 import axios from "axios";
+import EmployeeDetail from "./EmployeeDetail.vue";
+import Popup from "./Popup.vue";
 
 const myhost = "http://localhost:3000";
 export default {
-	components: {},
+	components: {
+		EmployeeDetail,
+		Popup
+	},
 	props: {
 		colapseClick: { type: Boolean, default: false } // responsive khi đóng mở navbar
 	},
@@ -99,8 +126,15 @@ export default {
 		return {
 			employees: [], // mảng danh sách nhân viên
 			isBusy: false, // Trạng thái của icon Loading
-			msg: "",
-			totalRecord: 0
+			msg: "", //message error
+			totalRecord: 0,
+			hide: true, // ẩn component EmployeeDetail
+			status: null, // trạng thái sửa, thêm mới
+			selectEmployee: {}, // data 1 nhân viên khi dblClick hoặc click btn Sửa
+			employeeTemp: {},
+			popHide: true,
+			recordId: null, // Lưu giá trị của EmployeeId để truyền qua Popup
+			recordCode: null // Lưu giá trị Employeecode truyền qua Popup
 		};
 	},
 	created() {
@@ -141,6 +175,94 @@ export default {
 		 */
 		btnRefreshClick() {
 			this.loadData();
+		},
+		hidePopup() {
+			this.popHide = true;
+			this.loadData();
+		},
+		btnDeleteClick(employeeId, employeeCode) {
+			this.popHide = false;
+			this.recordId = employeeId;
+			console.log(this.recordId);
+			this.recordCode = employeeCode;
+		},
+		/**
+		 * Click button Thêm nhân viên
+		 * CreatedBy: DucLM (27/09/2021)
+		 */
+		btnAdd() {
+			const userData = this.$cookies.get("user");
+			this.hide = false;
+			this.status = "add";
+			this.selectEmployee = {};
+			this.selectEmployee.userId = userData.id;
+		},
+		/**
+		 * hide employeeDetail not load data
+		 * CreatedBy: DucLM (27/09/2021)
+		 */
+		hideDialogNotLoad() {
+			this.hide = true;
+		},
+		/**
+		 * hide employeeDetail and load data
+		 * CreatedBy: DucLM (27/09/2021)
+		 */
+		hideDialog() {
+			this.hide = true;
+			this.loadData();
+		},
+		/**
+		 * btn edit click
+		 * CreatedBy: DucLM (27/09/2021)
+		 */
+		btnEditClick(employeeClickId) {
+			this.dblClickTable(employeeClickId);
+		},
+		/**
+		 * double click on table
+		 * CreatedBy: DucLM (27/09/2021)
+		 */
+		dblClickTable(eId) {
+			// gán cờ thành nút sửa
+			this.status = "edit";
+			//Lấy ra id của employee
+			// this.id = eId;
+			//show Dialog
+			this.hide = false;
+			//Fill employee vào dialog
+			const userData = this.$cookies.get("user");
+			axios
+				.get(myhost + `/employees?userId=${userData.id}&&id=${eId}`)
+				.then(response => {
+					// console.log(response);
+					this.selectEmployee = response.data[0];
+					// format lại dữ liệu hiển thị
+					this.selectEmployee.dateOfBirth = this.dateFormatYYMMDD(
+						this.selectEmployee.dateOfBirth
+					);
+					this.selectEmployee.identityDate = this.dateFormatYYMMDD(
+						this.selectEmployee.identityDate
+					);
+					//copy data object
+					this.employeeTemp = Object.assign({}, this.selectEmployee);
+				})
+				.catch(response => {
+					console.log(response);
+				});
+		},
+		/**
+		 * format date yyMMdd
+		 * CreatedBy: DucLM (27/09/2021)
+		 */
+		dateFormatYYMMDD(date) {
+			var newDate = new Date(date);
+			var day = newDate.getDate();
+			var month = newDate.getMonth() + 1;
+			var year = newDate.getFullYear();
+			day = day < 10 ? "0" + day : day;
+			month = month < 10 ? "0" + month : month;
+			return `${year}-${month}-${day}`;
 		}
 	}
 };
@@ -204,6 +326,18 @@ export default {
 	line-height: 13px;
 	justify-content: center;
 	align-items: center;
+}
+.btn-delete {
+	padding: 6px 10px;
+	outline: none;
+	border: 1px solid #ccc;
+	background-color: #dc3545;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #fff;
+}
+.btn-delete:hover {
+	opacity: 0.7;
 }
 .pr-4 {
 	padding-right: 4px !important;

@@ -5,6 +5,56 @@
 
 @import url("../../assets/font/fontawesome-5.15.1/css/all.css");
 
+@import url("../styles/input.css");
+.row {
+    margin-bottom: 8px;
+}
+
+.row::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.col-full {
+    width: 100%;
+}
+.col-half {
+    width: 50%;
+}
+
+.col-6{
+    width: 60%;
+}
+
+.col-4{
+    width: 40%;
+}
+
+.col-5{
+    width: 25%;
+}
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.text-red {
+    color: red;
+}
+
+.mg-r20{
+    margin-right: 20px;
+}
+
+.mg-r8{
+    margin-right: 8px;
+}
+
+.mg-t20{
+    margin-top: 20px;
+}
+
 /**
 Scroll
 */
