@@ -53,7 +53,7 @@
   "employees": [
     {
       "userId": 3,
-      "id": "541fbd9",
+      "id": 1,
       "employeeCode": "Nv4d3333223",
       "employeeName": "nguy33333en van a",
       "dateOfBirth": "2021-03-30T00:00:00",
@@ -78,7 +78,7 @@
     },
     {
       "userId": 1,
-      "id": "3046997",
+      "id": 2,
       "employeeCode": "Nv43223",
       "employeeName": "nguyen van a",
       "dateOfBirth": "2021-03-30T00:00:00",
@@ -103,7 +103,7 @@
     },
     {
       "userId": 1,
-      "id": "8ee6bde",
+      "id": 3,
       "employeeCode": "NV2323233",
       "employeeName": "Lê Xuân Cảnh",
       "dateOfBirth": "1999-12-31T00:00:00",
@@ -128,7 +128,7 @@
     },
     {
       "userId": 1,
-      "id": "a194c55",
+      "id": 4,
       "employeeCode": "NV989",
       "employeeName": "Hải Anh",
       "dateOfBirth": "1970-01-15",
@@ -153,7 +153,7 @@
     },
     {
       "userId": 1,
-      "id": "197e7c0",
+      "id": 5,
       "employeeCode": "NV182308",
       "employeeName": "Đào Nguyệt Hà",
       "dateOfBirth": "1973-06-14",
@@ -178,7 +178,7 @@
     },
     {
       "userId": 1,
-      "id": "2ebba2a",
+      "id": 6,
       "employeeCode": "NV0010",
       "employeeName": "Lê Trọng Hiếu ",
       "dateOfBirth": "1970-01-01",
@@ -203,7 +203,7 @@
     },
     {
       "userId": 1,
-      "id": "3e6b57f",
+      "id": 7,
       "employeeCode": "Nv34",
       "employeeName": "Thu Hương Nguyễn",
       "dateOfBirth": null,
@@ -228,7 +228,7 @@
     },
     {
       "userId": 1,
-      "id": "742639e",
+      "id": 8,
       "employeeCode": "NV8334",
       "employeeName": "Hương Hóm Hỉnh",
       "dateOfBirth": null,
@@ -253,7 +253,7 @@
     },
     {
       "userId": 1,
-      "id": "78a918d",
+      "id": 9,
       "employeeCode": "NV001",
       "employeeName": "Nguyễn Thị Hà",
       "dateOfBirth": null,
@@ -278,7 +278,7 @@
     },
     {
       "userId": 1,
-      "id": "82d216d",
+      "id": 10,
       "employeeCode": "NV83467824",
       "employeeName": "Nguyễn Xuân Quang",
       "dateOfBirth": null,
@@ -303,7 +303,7 @@
     },
     {
       "userId": 1,
-      "id": "c5edf5f",
+      "id": 11,
       "employeeCode": "NV002",
       "employeeName": "Lê Trọng Hiếu",
       "dateOfBirth": "1970-01-01",
@@ -328,7 +328,7 @@
     },
     {
       "userId": 1,
-      "id": "caf55b4",
+      "id": 12,
       "employeeCode": "NV67824",
       "employeeName": "Nguyễn Xuân Trường",
       "dateOfBirth": null,
@@ -353,7 +353,7 @@
     },
     {
       "userId": 1,
-      "id": "db345e5",
+      "id": 13,
       "employeeCode": "NV3242",
       "employeeName": "Lê Hồng Phong",
       "dateOfBirth": null,
@@ -378,7 +378,7 @@
     },
     {
       "userId": 1,
-      "id": "e076ec7",
+      "id": 14,
       "employeeCode": "NV093824",
       "employeeName": "Ngô Cẩm Tú",
       "dateOfBirth": null,
@@ -403,7 +403,7 @@
     },
     {
       "userId": 1,
-      "id": "ed74632",
+      "id": 15,
       "employeeCode": "NV003",
       "employeeName": "Cao Thái Hà",
       "dateOfBirth": null,
@@ -428,7 +428,7 @@
     },
     {
       "userId": 1,
-      "id": "f003e74",
+      "id": 16,
       "employeeCode": "NV23824",
       "employeeName": "Hà Thu Liên",
       "dateOfBirth": null,
@@ -453,7 +453,7 @@
     },
     {
       "userId": 1,
-      "id": "ff75ac8",
+      "id": 17,
       "employeeCode": "NV2308",
       "employeeName": "Mạnh Hải",
       "dateOfBirth": null,
@@ -494,7 +494,7 @@
       "bankAccountNumber": "12345678",
       "bankName": "MB",
       "bankBranchName": "PGD Nguyễn Chí Thanh",
-      "id": "GeOIY1O"
+      "id": 18
     },
     {
       "userId": 1,
@@ -514,7 +514,47 @@
       "bankAccountNumber": "12345678",
       "bankName": "MB",
       "bankBranchName": "PGD Nguyễn Chí Thanh",
-      "id": "m4rcACE"
+      "id": 19
+    },
+    {
+      "userId": 3,
+      "employeeCode": "NV001",
+      "employeeName": "Nguyễn Văn An",
+      "dateOfBirth": "1990-10-20",
+      "gender": "1",
+      "departmentId": "142cb08f-7c31-21fa-8e90-67245e8b283e",
+      "identityNumber": "02335165785",
+      "identityDate": "2020-11-14",
+      "employeePosition": "Nhân viên",
+      "identityPlace": "Hà Nội",
+      "address": "Nguyễn Chí Thanh, Ba Đình, Hà Nội",
+      "phoneNumber": "128451252325",
+      "telephoneNumber": "154163246532",
+      "email": "annguyen@mail.com",
+      "bankAccountNumber": "5154153210",
+      "bankName": "Agribank",
+      "bankBranchName": "Nguyễn Chí Thanh",
+      "id": 20
+    },
+    {
+      "userId": 3,
+      "employeeCode": "NV0010",
+      "employeeName": "Nguyen",
+      "dateOfBirth": "2021-09-08",
+      "gender": "1",
+      "departmentId": "142cb08f-7c31-21fa-8e90-67245e8b283e",
+      "identityNumber": "213213",
+      "identityDate": "2021-09-14",
+      "employeePosition": "Nhân viên",
+      "identityPlace": "Hà Nội",
+      "address": "Nguyễn Chí Thanh, Ba Đình, Hà Nội",
+      "phoneNumber": "1321254",
+      "telephoneNumber": "3215612",
+      "email": "hieult@mail.com",
+      "bankAccountNumber": "087878789390",
+      "bankName": "TPBank",
+      "bankBranchName": "Ba Đình",
+      "id": 21
     }
   ],
   "departments": [

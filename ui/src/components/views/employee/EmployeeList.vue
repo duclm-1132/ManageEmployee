@@ -12,7 +12,13 @@
 			<div class="item">
 				<div class="text-msg">{{msg}}</div>
 				<div class="item-right">
-					<input type="text" placeholder="Tìm theo mã, tên nhân viên" class="input-search2 input" />
+					<input
+						type="text"
+						v-model="filter"
+						@input="onChangeInputEmployeeFilter"
+						placeholder="Tìm theo mã, tên nhân viên"
+						class="input-search2 input"
+					/>
 					<div class="content-icon refresh" title="Lấy lại dữ liệu" @click="btnRefreshClick"></div>
 				</div>
 			</div>
@@ -79,7 +85,7 @@
 			<div class="content-navpage">
 				<div class="content-navpage-text-left">Tổng số: {{ totalRecord }} bản ghi</div>
 				<div class="footer-complete">
-					<select name id>
+					<select class="input" :value="pageSize" @change.prevent="onSelectedValue">
 						<option value="10">10 bản ghi trên 1 trang</option>
 						<option value="20">20 bản ghi trên 1 trang</option>
 						<option value="30">30 bản ghi trên 1 trang</option>
@@ -134,7 +140,11 @@ export default {
 			employeeTemp: {},
 			popHide: true,
 			recordId: null, // Lưu giá trị của EmployeeId để truyền qua Popup
-			recordCode: null // Lưu giá trị Employeecode truyền qua Popup
+			recordCode: null, // Lưu giá trị Employeecode truyền qua Popup
+			pageSize: 10,
+			pageIndex: 1,
+			filter: "",
+			totalPages: 1
 		};
 	},
 	created() {
@@ -166,6 +176,32 @@ export default {
 				})
 				.then(() => {
 					// Load xong thì tắt icon load
+					this.isBusy = false;
+				});
+		},
+		onSelectedValue(e) {
+			let val = e.target.value;
+			this.pageSize = val;
+			console.log(this.filter);
+			this.filterData();
+		},
+		filterData() {
+			this.isBusy = true;
+			axios
+				.get(
+					myhost +
+						`/employees?q=${this.filter}&_page=${this.pageIndex}&_limit=${this.pageSize}`
+				)
+				.then(response => {
+					console.log(response);
+					this.employees = response.data;
+					this.totalPages = response.data.totalPages;
+					console.log(this.totalPages);
+				})
+				.catch(response => {
+					console.log(response);
+				})
+				.then(() => {
 					this.isBusy = false;
 				});
 		},
@@ -249,6 +285,38 @@ export default {
 				})
 				.catch(response => {
 					console.log(response);
+				});
+		},
+		onChangeInputEmployeeFilter(e) {
+			let val = e.target.value;
+			clearTimeout(this.timeOut);
+			this.timeOut = setTimeout(() => {
+				this.filter = val;
+				// this.pageSize = 1000
+				this.pageIndex = 1;
+				console.log(this.filter);
+				this.filterSetTotalRecord();
+			}, 1000);
+		},
+		filterSetTotalRecord() {
+			this.isBusy = true;
+			axios
+				.get(
+					myhost +
+						`/employees?q=${this.filter}&_page=${this.pageIndex}&_limit=${this.pageSize}`
+				)
+				.then(response => {
+					console.log(response);
+					this.employees = response.data;
+					this.totalRecord = this.employees.length;
+					this.totalPages = response.data.totalPages;
+					console.log(this.totalPages);
+				})
+				.catch(response => {
+					console.log(response);
+				})
+				.then(() => {
+					this.isBusy = false;
 				});
 		},
 		/**
