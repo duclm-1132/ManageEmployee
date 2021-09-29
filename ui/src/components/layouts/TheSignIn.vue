@@ -52,7 +52,7 @@
 	</div>
 </template>
 
-<style>
+<style scoped>
 .text-msg {
 	color: red;
 	font-size: 12px;
@@ -203,7 +203,7 @@ export default {
 						} else {
 							//3. check password
 							if (this.data1.password == this.password) {
-								this.$cookies.set("user", this.data1, "1h");
+								this.$cookies.set("user", this.data1, "10h");
 								router.push({ name: "HomePage" });
 							} else {
 								this.msg = "Sai mật khẩu";
