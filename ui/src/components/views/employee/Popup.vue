@@ -94,7 +94,6 @@ export default {
 		 * CreatedBy: DucLM (28/09/2021)
 		 */
 		btnSubmit() {
-			const userData = this.$cookies.get("user");
 			axios
 				.delete(`${myhost}/employees/${this.employeeClickId}`)
 				.then(res => {
