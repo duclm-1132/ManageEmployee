@@ -48,6 +48,22 @@
       "username": "minhduc1234",
       "password": "12345678",
       "id": 6
+    },
+    {
+      "firstName": "Lee",
+      "lastName": "Nguyen",
+      "companyName": "abc1111",
+      "username": "duc11",
+      "password": "1",
+      "id": 7
+    },
+    {
+      "firstName": "Lee",
+      "lastName": "Nguyen",
+      "companyName": "abc",
+      "username": "duc2",
+      "password": "1",
+      "id": 8
     }
   ],
   "employees": [
@@ -79,12 +95,12 @@
     {
       "userId": 1,
       "id": 2,
-      "employeeCode": "Nv43223",
+      "employeeCode": "NV43223",
       "employeeName": "nguyen van a",
-      "dateOfBirth": "2021-03-30T00:00:00",
-      "gender": 0,
+      "dateOfBirth": "2021-03-30",
+      "gender": "1",
       "identityNumber": "5646",
-      "identityDate": null,
+      "identityDate": "1970-01-01",
       "identityPlace": "hà nôi",
       "email": "gdsfadsfds",
       "phoneNumber": "23432",

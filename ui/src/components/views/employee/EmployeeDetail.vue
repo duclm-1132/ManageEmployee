@@ -374,7 +374,7 @@ export default {
 	props: {
 		hide: { type: Boolean, default: false }, //ẩn component EmployeeDetail
 		flag: { type: String, default: null }, // flag check add or edit
-		employee: { type: Object, selector: null }, // Đối tượng nhân viên được truyền từ EmployeeList sang
+		employee: { type: Object, selector: null } // Đối tượng nhân viên được truyền từ EmployeeList sang
 		// textMuteEmployeeCode: { type: Boolean, default: true },
 		// textMuteEmployeeName: { type: Boolean, default: true }
 	},
@@ -444,8 +444,8 @@ export default {
 				} else if (this.flag == "edit") {
 					this.putEmployee();
 				}
-			}else{
-				alert("this.msg")
+			} else {
+				alert("this.msg");
 			}
 		},
 		/**
@@ -456,8 +456,7 @@ export default {
 			if (!this.employee.employeeCode) {
 				// this.textMuteEmployeeCode = false;
 				this.$refs.employeeCode.focus();
-			} else 
-			if (!this.employee.employeeName) {
+			} else if (!this.employee.employeeName) {
 				// this.textMuteEmployeeName = false;
 				this.$refs.employeeName.focus();
 			} else {
@@ -476,9 +475,11 @@ export default {
 				.then(res => {
 					console.log(res);
 					this.$emit("hideDialog");
+					this.$toast.success("Thêm thành công");
 				})
 				.catch(res => {
 					console.log(res.response.data.devMsg);
+					this.$toast.error("Thêm thất bại");
 				});
 		},
 		/**
@@ -491,10 +492,12 @@ export default {
 				.then(res => {
 					console.log(res.data);
 					this.$emit("hideDialog");
+					this.$toast.success("Sửa thành công");
 				})
 				.catch(res => {
 					console.log(res.data);
 					console.log(this.employee);
+					this.$toast.error("Sửa thất bại");
 					// this.$emit("hideDialog");
 				});
 		}

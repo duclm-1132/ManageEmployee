@@ -204,6 +204,7 @@ export default {
 							//3. check password
 							if (this.data1.password == this.password) {
 								this.$cookies.set("user", this.data1, "10h");
+								this.$toast.success("Đăng nhập thành công");
 								router.push({ name: "HomePage" });
 							} else {
 								this.msg = "Sai mật khẩu";

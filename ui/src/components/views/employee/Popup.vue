@@ -99,6 +99,7 @@ export default {
 				.then(res => {
 					console.log(res);
 					this.$emit("hidePopup");
+					this.$toast.success(`Đã xóa ${this.employeeClickCode}`);
 				})
 				.catch(res => {
 					console.log(res);

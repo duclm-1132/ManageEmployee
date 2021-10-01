@@ -119,7 +119,11 @@
 
 .container {
 	padding: 15px;
-	width: 100%;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .container__item {
@@ -252,17 +256,21 @@ export default {
 		 */
 		btnClickSignUp() {
 			if (this.validate()) {
-				axios
+				this.postUser()
+			}
+		},
+		postUser(){
+			axios
 					.post("http://localhost:3000/users", this.user)
 					.then(res => {
 						console.log(res);
+						this.$toast.success("Đăng ký thành công");
 						router.push("/");
 					})
 					.catch(res => {
 						console.log(res);
-						alert("false");
+						this.$toast.error(`${res.userMsg}`);
 					});
-			}
 		}
 	}
 };
